@@ -1,0 +1,9 @@
+<StyleCopSettings Version="105">
+  <GlobalSettings>
+    <CollectionProperty Name="RecognizedWords">
+      <Value>int</Value>
+      <Value>mutator</Value>
+      <Value>unioned</Value>
+    </CollectionProperty>
+  </GlobalSettings>
+</StyleCopSettings>

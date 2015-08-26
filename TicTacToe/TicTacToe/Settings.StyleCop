@@ -1,0 +1,9 @@
+<StyleCopSettings Version="105">
+  <GlobalSettings>
+    <CollectionProperty Name="RecognizedWords">
+      <Value>tac</Value>
+      <Value>Tac</Value>
+      <Value>tic</Value>
+    </CollectionProperty>
+  </GlobalSettings>
+</StyleCopSettings>
