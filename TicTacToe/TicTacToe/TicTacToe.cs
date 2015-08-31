@@ -43,23 +43,6 @@ namespace TicTacToe
         }
 
         /// <summary>
-        /// Prints a given string to the center of the console given that the standard console
-        /// width is 80 characters
-        /// </summary>
-        /// <param name="s">The string to print in the center of the console</param>
-        public void PrintCenter(string s)
-        {
-            int buffer = (MAX_CONSOLE_WIDTH - s.Length) / 2;
-
-            for (int k = 0; k < buffer; k++)
-            {
-                Console.Write(" ");
-            }
-
-            Console.Write(s);
-        }
-
-        /// <summary>
         /// Prints the current game board to the console
         /// </summary>
         public void PrintBoard()
@@ -152,6 +135,23 @@ namespace TicTacToe
                     again = false;
                 }
             }
+        }
+
+        /// <summary>
+        /// Prints a given string to the center of the console given that the standard console
+        /// width is 80 characters
+        /// </summary>
+        /// <param name="s">The string to print in the center of the console</param>
+        private void PrintCenter(string s)
+        {
+            int buffer = (MAX_CONSOLE_WIDTH - s.Length) / 2;
+
+            for (int k = 0; k < buffer; k++)
+            {
+                Console.Write(" ");
+            }
+
+            Console.Write(s);
         }
 
         /// <summary>
