@@ -1,11 +1,11 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Program.cs" company="Russell Tan Enterprises">
-//     Copyright - Russell Tan Enterprises
+// <copyright file="Program.cs" company="Russell Tan">
+//     Copyright - Russell Tan 
 // </copyright>
 // Name: Russell Tan
 // Class: CECS 475 Application development with ASP.NET
-// Date:
-// Purpose: Create an simulate a tic tac toe game on the console
+// Date: 30 August 2015
+// Purpose: Create and simulate a tic tac toe game on the console
 //-----------------------------------------------------------------------
 namespace TicTacToe
 {

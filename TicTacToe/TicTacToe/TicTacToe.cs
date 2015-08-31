@@ -1,11 +1,11 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TicTacToe.cs" company="Russell Tan Enterprises">
-//     Copyright - Russell Tan Enterprises
+// <copyright file="TicTacToe.cs" company="Russell Tan">
+//     Copyright - Russell Tan
 // </copyright>
 // Name: Russell Tan
 // Class: CECS 475 Application development with ASP.NET
-// Date:
-// Purpose: Create an simulate a tic tac toe game on the console
+// Date: 30 August 2015
+// Purpose: Create and simulate a tic tac toe game on the console
 //-----------------------------------------------------------------------
 namespace TicTacToe
 {
@@ -19,11 +19,13 @@ namespace TicTacToe
     /// Class for the Tic Tac Toe application
     /// </summary>
     public class TicTacToe
-    {
+    {     
         /// <summary>
         /// Private members for a standard tic tac toe game
         /// </summary>
         private const int BOARDSIZE = 3;
+        private const int MAX_CONSOLE_WIDTH = 80;
+        private const int TOTAL_MOVES = BOARDSIZE * BOARDSIZE;
         private int[,] board;
         private int numberOfMoves;
         private bool playerOne;
@@ -41,28 +43,56 @@ namespace TicTacToe
         }
 
         /// <summary>
+        /// Prints a given string to the center of the console given that the standard console
+        /// width is 80 characters
+        /// </summary>
+        /// <param name="s">The string to print in the center of the console</param>
+        public void PrintCenter(string s)
+        {
+            int buffer = (MAX_CONSOLE_WIDTH - s.Length) / 2;
+
+            for (int k = 0; k < buffer; k++)
+            {
+                Console.Write(" ");
+            }
+
+            Console.Write(s);
+        }
+
+        /// <summary>
         /// Prints the current game board to the console
         /// </summary>
         public void PrintBoard()
         {
-            int j, k;
+            Console.Clear();
 
+            int j, k;
+            string dataRow;
+
+            Console.WriteLine("\n\n\n");
+            this.PrintCenter("Welcome to Tic-Tac-Toe!\n\n");
+
+            // Print row by row
             for (j = 0; j < BOARDSIZE; j++)
             {
-                Console.WriteLine("-------------");
-                Console.WriteLine("|   |   |   |");
-                Console.Write("| ");
+                // Top
+                this.PrintCenter("-------------\n");
+                this.PrintCenter("|   |   |   |\n");
+                dataRow = " | ";
 
+                // Each column's value
                 for (k = 0; k < BOARDSIZE; k++)
                 {
-                    Console.Write(this.board[j, k] + " | ");
+                    dataRow += this.board[j, k] + " | ";
                 }
 
-                Console.WriteLine(" ROW: " + j);
-                Console.WriteLine("|   |   |   |");
+                this.PrintCenter(dataRow + "\n");
+
+                // Bottom
+                this.PrintCenter("|   |   |   |\n");
             }
 
-            Console.WriteLine("-------------");
+            this.PrintCenter("-------------\n");
         }
 
         /// <summary>
@@ -71,41 +101,51 @@ namespace TicTacToe
         /// </summary>
         public void Play()
         {
+            string ans;
             bool again = true;
+
+            // Play again after game finishes
             while (again)
             {
+                // While game is in progress
                 while (!this.gameOver)
                 {
                     if (this.playerOne)
                     {
-                        Console.WriteLine("\n\n\tPlayer One");
+                        Console.WriteLine("\n\n\t\tPlayer One's Turn");
                     }
                     else
                     {
-                        Console.WriteLine("\n\n\tPlayer Two");
+                        Console.WriteLine("\n\n\t\tPlayer Two's Turn");
                     }
 
-                    Console.Write("Enter a row: ");
-                    int row = int.Parse(Console.ReadLine());
-                    Console.Write("\nEnter a col: ");
-                    int col = int.Parse(Console.ReadLine());
-
-                    this.Move(row, col);
+                    Console.Write("\tEnter a row: ");
+                    try
+                    {
+                        int row = int.Parse(Console.ReadLine());
+                        Console.Write("\n\tEnter a col: ");
+                        int col = int.Parse(Console.ReadLine());
+                        this.Move(row, col);
+                    }
+                    catch (FormatException e)
+                    {
+                        // Try catch used to throw out "format" exceptions
+                        // This limits the input to ONLY intgers
+                    }
 
                     this.PrintBoard();
+
+                    // See if there is a winning condition on the board
                     this.gameOver = this.CheckWin();
-                    if (this.numberOfMoves == BOARDSIZE * BOARDSIZE && !this.CheckWin())
-                    {
-                        Console.WriteLine("CATS GAME!");
-                        this.ResetGame();
-                    }
                 }
 
-                Console.WriteLine("Play again? y/n");
-                if (Console.ReadLine() == "y")
+                this.PrintCenter("\tPlay again? y/n\n");
+                ans = Console.ReadLine().ToLower();
+                if (ans == "y" || ans == "yes")
                 {
                     again = true;
                     this.ResetGame();
+                    this.PrintBoard();
                 }
                 else
                 {
@@ -138,19 +178,23 @@ namespace TicTacToe
             {
                 if (!this.playerOne)
                 {
-                    Console.WriteLine("CONGRSTULATIONS PLAYER ONE!!!! You won this round!");
+                    this.PrintCenter("CONGRATULATIONS PLAYER ONE!!!! You won this round!");
                 }
                 else
                 {
-                    Console.WriteLine("CONGRSTULATIONS PLAYER TWO!!!! You won this round!");
+                    this.PrintCenter("CONGRATULATIONS PLAYER TWO!!!! You won this round!");
                 }
 
                 return true;
             }
-            else
+
+            if (this.numberOfMoves == TOTAL_MOVES)
             {
-                return false;
+                this.PrintCenter("CATS GAME!");
+                return true;                
             }
+
+            return false;
         }
 
         /// <summary>
@@ -233,44 +277,57 @@ namespace TicTacToe
         /// <param name="col">Column for the move</param>
         private void Move(int row, int col)
         {
-            if (this.playerOne)
+            if (row > 2 || col > 2)
             {
-                if (this.board[row, col] > 0)
-                {
-                    Console.WriteLine("Error, spot is already taken, try again...");
-                    Console.Write("Enter a row: ");
-                    int newRow = int.Parse(Console.ReadLine());
-                    Console.Write("\nEnter a col: ");
-                    int newCol = int.Parse(Console.ReadLine());
+                Console.WriteLine("\tError, Coordinates out of bounds, try again...");
+                Console.Write("\tEnter a row: ");
+                int newRow = int.Parse(Console.ReadLine());
+                Console.Write("\n\tEnter a col: ");
+                int newCol = int.Parse(Console.ReadLine());
 
-                    this.Move(newRow, newCol);
-                }
-                else
-                {
-                    this.board[row, col] = 1;
-                    this.playerOne = false;
-                }
+                this.Move(newRow, newCol);
             }
             else
             {
-                if (this.board[row, col] > 0)
+                if (this.playerOne)
                 {
-                    Console.WriteLine("Error, spot is already taken, try again...");
-                    Console.Write("Enter a row: ");
-                    int newRow = int.Parse(Console.ReadLine());
-                    Console.Write("\nEnter a col: ");
-                    int newCol = int.Parse(Console.ReadLine());
+                    if (this.board[row, col] > 0)
+                    {
+                        Console.WriteLine("\tError, spot is already taken, try again...");
+                        Console.Write("\tEnter a row: ");
+                        int newRow = int.Parse(Console.ReadLine());
+                        Console.Write("\n\tEnter a col: ");
+                        int newCol = int.Parse(Console.ReadLine());
 
-                    this.Move(newRow, newCol);
+                        this.Move(newRow, newCol);
+                    }
+                    else
+                    {
+                        this.board[row, col] = 1;
+                        this.playerOne = false;
+                        this.numberOfMoves++;
+                    }
                 }
                 else
                 {
-                    this.board[row, col] = 2;
-                    this.playerOne = true;
+                    if (this.board[row, col] > 0)
+                    {
+                        Console.WriteLine("\tError, spot is already taken, try again...");
+                        Console.Write("\tEnter a row: ");
+                        int newRow = int.Parse(Console.ReadLine());
+                        Console.Write("\n\tEnter a col: ");
+                        int newCol = int.Parse(Console.ReadLine());
+
+                        this.Move(newRow, newCol);
+                    }
+                    else
+                    {
+                        this.board[row, col] = 2;
+                        this.playerOne = true;
+                        this.numberOfMoves++;
+                    }
                 }
             }
-
-            this.numberOfMoves++;
         }
     }
 }
