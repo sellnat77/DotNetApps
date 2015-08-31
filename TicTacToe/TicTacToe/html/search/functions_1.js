@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['play',['Play',['../class_tic_tac_toe_1_1_tic_tac_toe.html#a5e506ff8851b71a18ccc16c04a9a6e4e',1,'TicTacToe::TicTacToe']]],
-  ['printboard',['PrintBoard',['../class_tic_tac_toe_1_1_tic_tac_toe.html#a96810a66e906f7d1c01928582707fd44',1,'TicTacToe::TicTacToe']]]
+  ['main',['Main',['../class_tic_tac_toe_1_1_program.html#abf41458e515ee52ea91c2f66323daecc',1,'TicTacToe::Program']]],
+  ['move',['Move',['../class_tic_tac_toe_1_1_tic_tac_toe.html#a4930e06e7982e729a55c18feca089d06',1,'TicTacToe::TicTacToe']]]
 ];

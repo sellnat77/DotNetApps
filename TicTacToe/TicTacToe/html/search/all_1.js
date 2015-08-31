@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['play',['Play',['../class_tic_tac_toe_1_1_tic_tac_toe.html#a5e506ff8851b71a18ccc16c04a9a6e4e',1,'TicTacToe::TicTacToe']]],
-  ['printboard',['PrintBoard',['../class_tic_tac_toe_1_1_tic_tac_toe.html#a96810a66e906f7d1c01928582707fd44',1,'TicTacToe::TicTacToe']]],
-  ['program',['Program',['../class_tic_tac_toe_1_1_program.html',1,'TicTacToe']]]
+  ['checkdiag',['CheckDiag',['../class_tic_tac_toe_1_1_tic_tac_toe.html#a37cb4bd5dff23b5f6d433aa566938c90',1,'TicTacToe::TicTacToe']]],
+  ['checkhoriz',['CheckHoriz',['../class_tic_tac_toe_1_1_tic_tac_toe.html#aa75b940e51a60ccb6c9001147cc09fd7',1,'TicTacToe::TicTacToe']]],
+  ['checkvert',['CheckVert',['../class_tic_tac_toe_1_1_tic_tac_toe.html#a5e7ce3305a34fd8f82a15a444890c2f2',1,'TicTacToe::TicTacToe']]],
+  ['checkwin',['CheckWin',['../class_tic_tac_toe_1_1_tic_tac_toe.html#aaa2941579aad6b8906d56297421f697e',1,'TicTacToe::TicTacToe']]]
 ];

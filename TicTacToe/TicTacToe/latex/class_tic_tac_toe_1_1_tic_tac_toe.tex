@@ -14,6 +14,46 @@ void \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a96810a66e906f7d1c01928582707f
 \begin{DoxyCompactList}\small\item\em Prints the current game board to the console \end{DoxyCompactList}\item 
 void \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a5e506ff8851b71a18ccc16c04a9a6e4e}{Play} ()
 \begin{DoxyCompactList}\small\item\em Allows the game to be played repeatedly and handles the gameplay mechanics of the tic tac toe application \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_abd09f8cb5ea220b735b12777e91b30b8}{Print\+Center} (string s)
+\begin{DoxyCompactList}\small\item\em Prints a given string to the center of the console given that the standard console width is 80 characters \end{DoxyCompactList}\item 
+void \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_ad5d26d820ef644351123c87f71197ebd}{Reset\+Game} ()
+\begin{DoxyCompactList}\small\item\em Resets the game elements \end{DoxyCompactList}\item 
+bool \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_aaa2941579aad6b8906d56297421f697e}{Check\+Win} ()
+\begin{DoxyCompactList}\small\item\em Checks if there is a victory on the game board by the use of helper methods \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a5e7ce3305a34fd8f82a15a444890c2f2}{Check\+Vert} \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_aa75b940e51a60ccb6c9001147cc09fd7}{Check\+Horiz} \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a37cb4bd5dff23b5f6d433aa566938c90}{Check\+Diag} \end{DoxyCompactList}\item 
+bool \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a5e7ce3305a34fd8f82a15a444890c2f2}{Check\+Vert} ()
+\begin{DoxyCompactList}\small\item\em Helper method to check for vertical victories on the game board \end{DoxyCompactList}\item 
+bool \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_aa75b940e51a60ccb6c9001147cc09fd7}{Check\+Horiz} ()
+\begin{DoxyCompactList}\small\item\em Helper method to check if there is a horizontal victory on the board \end{DoxyCompactList}\item 
+bool \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a37cb4bd5dff23b5f6d433aa566938c90}{Check\+Diag} ()
+\begin{DoxyCompactList}\small\item\em Helper method to check if there is a diagonal victory on the board \end{DoxyCompactList}\item 
+void \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a4930e06e7982e729a55c18feca089d06}{Move} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Lets a user place a \char`\"{}move\char`\"{} on the board based on row and column index starting at 0 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a25127e54bb6afd2fef9f9b4f5d9f35b0}{B\+O\+A\+R\+D\+S\+I\+Z\+E} = 3
+\begin{DoxyCompactList}\small\item\em Private members for a standard tic tac toe game \end{DoxyCompactList}\item 
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_ac535e95f10c14c05626a01fff25c6afc}{}const int {\bfseries M\+A\+X\+\_\+\+C\+O\+N\+S\+O\+L\+E\+\_\+\+W\+I\+D\+T\+H} = 80\label{class_tic_tac_toe_1_1_tic_tac_toe_ac535e95f10c14c05626a01fff25c6afc}
+
+\item 
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a608eb727a4de9d13af78b663a39322b6}{}const int {\bfseries T\+O\+T\+A\+L\+\_\+\+M\+O\+V\+E\+S} = \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a25127e54bb6afd2fef9f9b4f5d9f35b0}{B\+O\+A\+R\+D\+S\+I\+Z\+E} $\ast$ \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a25127e54bb6afd2fef9f9b4f5d9f35b0}{B\+O\+A\+R\+D\+S\+I\+Z\+E}\label{class_tic_tac_toe_1_1_tic_tac_toe_a608eb727a4de9d13af78b663a39322b6}
+
+\item 
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a950bd34d4c07d3a33b3d172788e2bc59}{}int\mbox{[},\mbox{]} {\bfseries board}\label{class_tic_tac_toe_1_1_tic_tac_toe_a950bd34d4c07d3a33b3d172788e2bc59}
+
+\item 
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_aca4efe700de5dbda413d90face7fe831}{}int {\bfseries number\+Of\+Moves}\label{class_tic_tac_toe_1_1_tic_tac_toe_aca4efe700de5dbda413d90face7fe831}
+
+\item 
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a5612d5cd165dd358b41c4fc3729e2917}{}bool {\bfseries player\+One}\label{class_tic_tac_toe_1_1_tic_tac_toe_a5612d5cd165dd358b41c4fc3729e2917}
+
+\item 
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a4b2605e85ca3408fbcb9324e8d3a591b}{}bool {\bfseries game\+Over}\label{class_tic_tac_toe_1_1_tic_tac_toe_a4b2605e85ca3408fbcb9324e8d3a591b}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -36,6 +76,81 @@ Initializes a new instance of the \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe}{
 
 
 \subsection{Member Function Documentation}
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a37cb4bd5dff23b5f6d433aa566938c90}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!Check\+Diag@{Check\+Diag}}
+\index{Check\+Diag@{Check\+Diag}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
+\subsubsection[{Check\+Diag()}]{\setlength{\rightskip}{0pt plus 5cm}bool Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+Check\+Diag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_tic_tac_toe_1_1_tic_tac_toe_a37cb4bd5dff23b5f6d433aa566938c90}
+
+
+Helper method to check if there is a diagonal victory on the board 
+
+\begin{DoxyReturn}{Returns}
+Returns true if there exists a diagonal victory on the board
+\end{DoxyReturn}
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_aa75b940e51a60ccb6c9001147cc09fd7}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!Check\+Horiz@{Check\+Horiz}}
+\index{Check\+Horiz@{Check\+Horiz}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
+\subsubsection[{Check\+Horiz()}]{\setlength{\rightskip}{0pt plus 5cm}bool Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+Check\+Horiz (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_tic_tac_toe_1_1_tic_tac_toe_aa75b940e51a60ccb6c9001147cc09fd7}
+
+
+Helper method to check if there is a horizontal victory on the board 
+
+\begin{DoxyReturn}{Returns}
+Returns true if there exists a victory on the board
+\end{DoxyReturn}
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a5e7ce3305a34fd8f82a15a444890c2f2}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!Check\+Vert@{Check\+Vert}}
+\index{Check\+Vert@{Check\+Vert}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
+\subsubsection[{Check\+Vert()}]{\setlength{\rightskip}{0pt plus 5cm}bool Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+Check\+Vert (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_tic_tac_toe_1_1_tic_tac_toe_a5e7ce3305a34fd8f82a15a444890c2f2}
+
+
+Helper method to check for vertical victories on the game board 
+
+\begin{DoxyReturn}{Returns}
+Returns true if there exists a vertical victory on the board
+\end{DoxyReturn}
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_aaa2941579aad6b8906d56297421f697e}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!Check\+Win@{Check\+Win}}
+\index{Check\+Win@{Check\+Win}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
+\subsubsection[{Check\+Win()}]{\setlength{\rightskip}{0pt plus 5cm}bool Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+Check\+Win (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_tic_tac_toe_1_1_tic_tac_toe_aaa2941579aad6b8906d56297421f697e}
+
+
+Checks if there is a victory on the game board by the use of helper methods \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a5e7ce3305a34fd8f82a15a444890c2f2}{Check\+Vert} \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_aa75b940e51a60ccb6c9001147cc09fd7}{Check\+Horiz} \hyperlink{class_tic_tac_toe_1_1_tic_tac_toe_a37cb4bd5dff23b5f6d433aa566938c90}{Check\+Diag} 
+
+\begin{DoxyReturn}{Returns}
+Returns true if there exists a victory on the board
+\end{DoxyReturn}
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a4930e06e7982e729a55c18feca089d06}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!Move@{Move}}
+\index{Move@{Move}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
+\subsubsection[{Move(int row, int col)}]{\setlength{\rightskip}{0pt plus 5cm}void Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+Move (
+\begin{DoxyParamCaption}
+\item[{int}]{row, }
+\item[{int}]{col}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_tic_tac_toe_1_1_tic_tac_toe_a4930e06e7982e729a55c18feca089d06}
+
+
+Lets a user place a \char`\"{}move\char`\"{} on the board based on row and column index starting at 0 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Row for the move\\
+\hline
+{\em col} & Column for the move\\
+\hline
+\end{DoxyParams}
 \hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a5e506ff8851b71a18ccc16c04a9a6e4e}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!Play@{Play}}
 \index{Play@{Play}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
 \subsubsection[{Play()}]{\setlength{\rightskip}{0pt plus 5cm}void Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+Play (
@@ -57,6 +172,43 @@ Allows the game to be played repeatedly and handles the gameplay mechanics of th
 
 
 Prints the current game board to the console 
+
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_abd09f8cb5ea220b735b12777e91b30b8}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!Print\+Center@{Print\+Center}}
+\index{Print\+Center@{Print\+Center}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
+\subsubsection[{Print\+Center(string s)}]{\setlength{\rightskip}{0pt plus 5cm}void Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+Print\+Center (
+\begin{DoxyParamCaption}
+\item[{string}]{s}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_tic_tac_toe_1_1_tic_tac_toe_abd09f8cb5ea220b735b12777e91b30b8}
+
+
+Prints a given string to the center of the console given that the standard console width is 80 characters 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The string to print in the center of the console\\
+\hline
+\end{DoxyParams}
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_ad5d26d820ef644351123c87f71197ebd}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!Reset\+Game@{Reset\+Game}}
+\index{Reset\+Game@{Reset\+Game}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
+\subsubsection[{Reset\+Game()}]{\setlength{\rightskip}{0pt plus 5cm}void Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+Reset\+Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}\label{class_tic_tac_toe_1_1_tic_tac_toe_ad5d26d820ef644351123c87f71197ebd}
+
+
+Resets the game elements 
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_tic_tac_toe_1_1_tic_tac_toe_a25127e54bb6afd2fef9f9b4f5d9f35b0}{}\index{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}!B\+O\+A\+R\+D\+S\+I\+Z\+E@{B\+O\+A\+R\+D\+S\+I\+Z\+E}}
+\index{B\+O\+A\+R\+D\+S\+I\+Z\+E@{B\+O\+A\+R\+D\+S\+I\+Z\+E}!Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe@{Tic\+Tac\+Toe\+::\+Tic\+Tac\+Toe}}
+\subsubsection[{B\+O\+A\+R\+D\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}const int Tic\+Tac\+Toe.\+Tic\+Tac\+Toe.\+B\+O\+A\+R\+D\+S\+I\+Z\+E = 3\hspace{0.3cm}{\ttfamily [private]}}\label{class_tic_tac_toe_1_1_tic_tac_toe_a25127e54bb6afd2fef9f9b4f5d9f35b0}
+
+
+Private members for a standard tic tac toe game 
 
 
 
