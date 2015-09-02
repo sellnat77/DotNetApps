@@ -19,7 +19,15 @@ namespace TicTacToe
     /// Class for the Tic Tac Toe application
     /// </summary>
     public class TicTacToe
-    {     
+    {
+
+        private enum gameStatus
+        {
+            playerOneWin = "CONGRATULATIONS PLAYER ONE!!!! You won this round!",
+            playerTwoWin = "CONGRATULATIONS PLAYER TWO!!!! You won this round!",
+            catsGame = "Cats Game!"
+        };
+
         /// <summary>
         /// Private members for a standard tic tac toe game
         /// </summary>
@@ -178,11 +186,11 @@ namespace TicTacToe
             {
                 if (!this.playerOne)
                 {
-                    this.PrintCenter("CONGRATULATIONS PLAYER ONE!!!! You won this round!");
+                    this.PrintCenter(gameStatus.playerOneWin.ToString());
                 }
                 else
                 {
-                    this.PrintCenter("CONGRATULATIONS PLAYER TWO!!!! You won this round!");
+                    this.PrintCenter(gameStatus.playerTwoWin.ToString());
                 }
 
                 return true;
@@ -190,7 +198,7 @@ namespace TicTacToe
 
             if (this.numberOfMoves == TOTAL_MOVES)
             {
-                this.PrintCenter("CATS GAME!");
+                this.PrintCenter(gameStatus.catsGame.ToString());
                 return true;                
             }
 
