@@ -119,7 +119,7 @@ namespace TicTacToe
                         int col = int.Parse(Console.ReadLine());
                         this.Move(row, col);
                     }
-                    catch (FormatException e)
+                    catch (FormatException)
                     {
                         // Try catch used to throw out "format" exceptions
                         // This limits the input to ONLY intgers
