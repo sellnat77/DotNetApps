@@ -66,7 +66,16 @@ namespace TicTacToe
                 // Each column's value
                 for (k = 0; k < BOARDSIZE; k++)
                 {
-                    dataRow += this.board[j, k] + " | ";
+                    // Fixes printing, instead of displaying 
+                    // 0 as the default, display a blank space
+                    if (this.board[j, k] != 0)
+                    {
+                        dataRow += this.board[j, k] + " | ";
+                    }
+                    else
+                    {
+                        dataRow += "  | ";
+                    }
                 }
 
                 this.PrintCenter(dataRow + "\n");
