@@ -29,10 +29,10 @@ public abstract class Employee : IPayable
    // this class must be declared abstract to avoid a compilation error.
    public abstract decimal GetPaymentAmount();
 
-   public void sortByFName();
-   public void sortByLName();
-   public void sortBySSN();
-   public void sortByPay();
+   //public void sortByFName();
+   //public void sortByLName();
+   //public void sortBySSN();
+   //public void sortByPay();
 } // end abstract class Employee
 
 /**************************************************************************
