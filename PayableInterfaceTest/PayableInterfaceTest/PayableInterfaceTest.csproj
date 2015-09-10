@@ -56,7 +56,6 @@
     <Compile Include="PayableInterfaceTest.cs" />
     <Compile Include="SalariedEmployee.cs" />
     <Compile Include="Employee.cs" />
-    <Compile Include="Invoice.cs" />
     <Compile Include="IPayable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

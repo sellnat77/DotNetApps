@@ -1,6 +1,4 @@
-﻿// Fig. 12.8: BasePlusCommissionEmployee.cs
-// BasePlusCommissionEmployee class that extends CommissionEmployee.
-using System;
+﻿using System;
 
 public class BasePlusCommissionEmployee : CommissionEmployee
 {
@@ -33,10 +31,10 @@ public class BasePlusCommissionEmployee : CommissionEmployee
    } // end property BaseSalary
 
    // calculate earnings; override method Earnings in CommissionEmployee
-   public override decimal GetPaymentAmount()
+   public override decimal Earnings()
    {
-      return BaseSalary + base.GetPaymentAmount();
-   } // end method Earnings               
+       return BaseSalary + base.Earnings();
+   } // end method Earnings                
 
    // return string representation of BasePlusCommissionEmployee object
    public override string ToString()
@@ -45,18 +43,3 @@ public class BasePlusCommissionEmployee : CommissionEmployee
          base.ToString(), BaseSalary );
    } // end method ToString                                            
 } // end class BasePlusCommissionEmployee
-
-/**************************************************************************
- * (C) Copyright 1992-2009 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
- * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
- **************************************************************************/

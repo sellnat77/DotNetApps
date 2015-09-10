@@ -1,106 +1,131 @@
-﻿// Fig. 12.15: PayableInterfaceTest.cs
-// Tests interface IPayable with disparate classes.
-using System;
+﻿using System;
 
-public class PayableInterfaceTest
+public class PayrollSystemTest
 {
-   public static void Main(string[] args)
-   {
-      // create four-element IPayable array
-      IPayable[] payableObjects = new IPayable[10];
+    public static void Main(string[] args)
+    {
+        // create derived class objects
+        SalariedEmployee salariedEmployee =
+           new SalariedEmployee("John", "Smith", "111-11-1111", 800.00M);
+        HourlyEmployee hourlyEmployee =
+           new HourlyEmployee("Karen", "Price",
+           "222-22-2222", 16.75M, 40.0M);
+        CommissionEmployee commissionEmployee =
+           new CommissionEmployee("Sue", "Jones",
+           "333-33-3333", 10000.00M, .06M);
+        BasePlusCommissionEmployee basePlusCommissionEmployee =
+           new BasePlusCommissionEmployee("Bob", "Lewis",
+           "444-44-4444", 5000.00M, .04M, 300.00M);
 
-      // populate array with objects that implement IPayable
-      payableObjects[0] = new Invoice("01234", "seat", 2, 375.00M);
-      payableObjects[1] = new Invoice("56789", "tire", 4, 79.95M);
-      payableObjects[2] = new SalariedEmployee("John", "Smith", "111-11-1111", 800.00M);
-      payableObjects[3] = new SalariedEmployee("Lisa", "Barnes", "888-88-8888", 1200.00M);
-      payableObjects[4] = new SalariedEmployee("Charles", "Phillipson", "999-98-5656", 1255.36M);
-      payableObjects[5] = new HourlyEmployee("Farrah", "Faucet", "123-45-6789",12.50m, 40.0m);
-      payableObjects[6] = new HourlyEmployee("Jake", "Jacobson", "564-89-7412", 10.50m, 40.0M);
-      payableObjects[7] = new CommissionEmployee("Phil", "Future", "898-75-4561",25000.00m,.07m );
-      payableObjects[8] = new BasePlusCommissionEmployee("Phyllis", "Garrison", "545-12-6789",5000m,.1m,50000.00m);
-      payableObjects[9] = new BasePlusCommissionEmployee("George", "Korals", "898-74-1459", 65400m, .15m, 40000.00m);
+        Console.WriteLine("Employees processed individually:\n");
 
-      Console.WriteLine("Invoices and Employees processed polymorphically:\n");
-      // generically process each element in array payableObjects
-      foreach (var currentPayable in payableObjects)
-      {
-         // output currentPayable and its appropriate payment amount
-         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.GetPaymentAmount());
-      } // end foreach
-      bool again = true;
+        Console.WriteLine("{0}\nearned: {1:C}\n",
+           salariedEmployee, salariedEmployee.Earnings());
+        Console.WriteLine("{0}\nearned: {1:C}\n",
+           hourlyEmployee, hourlyEmployee.Earnings());
+        Console.WriteLine("{0}\nearned: {1:C}\n",
+           commissionEmployee, commissionEmployee.Earnings());
+        Console.WriteLine("{0}\nearned: {1:C}\n",
+           basePlusCommissionEmployee,
+           basePlusCommissionEmployee.Earnings());
 
-       while(again)
-       {
-           Console.WriteLine("1.) Sort by social security number in ascending order");
-           Console.WriteLine("2.) Sort by last name in descending order");
-           Console.WriteLine("3.) Sort by pay amount in ascending order");
-           Console.WriteLine("4.) Sort by pay amount in descending order");
-           Console.WriteLine("5.) Exit");
+        // create four-element Employee array
+        Employee[] employees = new Employee[4];
 
-           switch(Console.ReadLine())
-           {
-               case "1":
-                   //Sort by ssn Asc
-                   Console.WriteLine("SORTING BY SSN\n\n");
-                   foreach (var currentPayable in payableObjects)
-                   {
-                       Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.GetPaymentAmount());
-                   }
-                   break;
-               case "2":
-                   //Sort by last name Desc
-                   Console.WriteLine("SORTING BY LAST NAME\n\n");
-                   foreach (var currentPayable in payableObjects)
-                   {
-                       Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.GetPaymentAmount());
-                   }
-                   break;
-               case "3":
-                   //Sort by $ Asc
-                   Console.WriteLine("SORTING BY PAY\n\n");
-                   foreach (var currentPayable in payableObjects)
-                   {
-                       Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.GetPaymentAmount());
-                   }
-                   break;
-               case "4":
-                   //Sort by $ Desc
-                   Console.WriteLine("SORTING BY PAY\n\n");
-                   foreach (var currentPayable in payableObjects)
-                   {
-                       Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.GetPaymentAmount());
-                   }
-                   break;
-               default:
-                   again = false;
-                   Console.WriteLine("Thank you!");
-                   break;
-           }
-       }
+        // initialize array with Employees of derived types
+        employees[0] = salariedEmployee;
+        employees[1] = hourlyEmployee;
+        employees[2] = commissionEmployee;
+        employees[3] = basePlusCommissionEmployee;
+
+        Console.WriteLine("Employees processed polymorphically:\n");
+
+        // generically process each element in array employees
+        foreach (Employee currentEmployee in employees)
+        {
+            Console.WriteLine(currentEmployee); // invokes ToString
+
+            // determine whether element is a BasePlusCommissionEmployee
+            if (currentEmployee is BasePlusCommissionEmployee)
+            {
+                // downcast Employee reference to 
+                // BasePlusCommissionEmployee reference
+                BasePlusCommissionEmployee employee =
+                   (BasePlusCommissionEmployee)currentEmployee;
+
+                employee.BaseSalary *= 1.10M;
+                Console.WriteLine(
+                   "new base salary with 10% increase is: {0:C}",
+                   employee.BaseSalary);
+            } // end if
+
+            Console.WriteLine(
+               "earned {0:C}\n", currentEmployee.Earnings());
+        } // end foreach
+
+        // get type name of each object in employees array
+        for (int j = 0; j < employees.Length; j++)
+            Console.WriteLine("Employee {0} is a {1}", j,
+               employees[j].GetType());
 
 
+        // generically process each element in array payableObjects
+        foreach (var currentPayable in employees)
+        {
+            // output currentPayable and its appropriate payment amount
+            Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+        } // end foreach
+        bool again = true;
 
+        while (again)
+        {
+            Console.WriteLine("1.) Sort by social security number in ascending order");
+            Console.WriteLine("2.) Sort by last name in descending order");
+            Console.WriteLine("3.) Sort by pay amount in ascending order");
+            Console.WriteLine("4.) Sort by pay amount in descending order");
+            Console.WriteLine("5.) Exit");
 
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    //Sort by ssn Asc
+                    Console.WriteLine("SORTING BY SSN\n\n");
+                    foreach (var currentPayable in employees)
+                    {
+                        Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+                    }
+                    break;
+                case "2":
+                    //Sort by last name Desc
+                    Console.WriteLine("SORTING BY LAST NAME\n\n");
+                    Array.Sort(employees,Employee.sortLNameDesc());
+                    foreach (var currentPayable in employees)
+                    {
+                        Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+                    }
+                    break;
+                case "3":
+                    //Sort by $ Asc
+                    Console.WriteLine("SORTING BY PAY\n\n");
+                    foreach (var currentPayable in employees)
+                    {
+                        Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+                    }
+                    break;
+                case "4":
+                    //Sort by $ Desc
+                    Console.WriteLine("SORTING BY PAY\n\n");
+                    foreach (var currentPayable in employees)
+                    {
+                        Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+                    }
+                    break;
+                default:
+                    again = false;
+                    Console.WriteLine("Thank you!");
+                    break;
+            }
+        }
 
-
-
-   } // end Main
-
-   
-} // end class PayableInterfaceTest
-
-/**************************************************************************
- * (C) Copyright 1992-2009 by Deitel & Associates, Inc. and               *
- * Pearson Education, Inc. All Rights Reserved.                           *
- *                                                                        *
- * DISCLAIMER: The authors and publisher of this book have used their     *
- * best efforts in preparing the book. These efforts include the          *
- * development, research, and testing of the theories and programs        *
- * to determine their effectiveness. The authors and publisher make       *
- * no warranty of any kind, expressed or implied, with regard to these    *
- * programs or to the documentation contained in these books. The authors *
- * and publisher shall not be liable in any event for incidental or       *
- * consequential damages in connection with, or arising out of, the       *
- * furnishing, performance, or use of these programs.                     *
- **************************************************************************/
+    } // end Main
+} // end class PayrollSystemTest
