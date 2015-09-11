@@ -90,6 +90,7 @@ public class PayrollSystemTest
                 case "1":
                     //Sort by ssn Asc
                     Console.WriteLine("SORTING BY SSN\n\n");
+                    Array.Sort(employees, Employee.sortBySSNAsc());
                     foreach (var currentPayable in employees)
                     {
                         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
@@ -98,7 +99,7 @@ public class PayrollSystemTest
                 case "2":
                     //Sort by last name Desc
                     Console.WriteLine("SORTING BY LAST NAME\n\n");
-                    Array.Sort(employees,Employee.sortLNameDesc());
+                    Array.Sort(employees,Employee.sortByLNameAsc());
                     foreach (var currentPayable in employees)
                     {
                         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
@@ -107,6 +108,7 @@ public class PayrollSystemTest
                 case "3":
                     //Sort by $ Asc
                     Console.WriteLine("SORTING BY PAY\n\n");
+                    Array.Sort(employees, Employee.sortByEarningsAsc());
                     foreach (var currentPayable in employees)
                     {
                         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
@@ -115,6 +117,7 @@ public class PayrollSystemTest
                 case "4":
                     //Sort by $ Desc
                     Console.WriteLine("SORTING BY PAY\n\n");
+                    Array.Sort(employees, Employee.sortByEarningsDesc());
                     foreach (var currentPayable in employees)
                     {
                         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
