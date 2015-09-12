@@ -1,10 +1,13 @@
 ﻿using System;
 
+public delegate int Comparer(Employee emp1, Employee emp2);
+
 public class PayrollSystemTest
 {
-    public static void Main(string[] args)
+    IPayable[] payableObjects = new IPayable[8];
+
+    public PayrollSystemTest()
     {
-        IPayable[] payableObjects = new IPayable[8];
         payableObjects[0] = new SalariedEmployee("John", "Smith", "111-11-1111", 700M);
         payableObjects[1] = new SalariedEmployee("Antonio", "Smith", "555-55-5555", 800M);
         payableObjects[2] = new SalariedEmployee("Victor", "Smith", "444-44-4444", 600M);
@@ -13,6 +16,14 @@ public class PayrollSystemTest
         payableObjects[5] = new CommissionEmployee("Sue", "Jones", "333-33-3333", 10000M, .06M);
         payableObjects[6] = new BasePlusCommissionEmployee("Bob", "Lewis", "777-77-7777", 5000M, .04M, 300M);
         payableObjects[7] = new BasePlusCommissionEmployee("Lee", "Duarte", "888-88-888", 5000M, .04M, 300M);
+    }
+
+    public static void Main(string[] args)
+    {
+        PayrollSystemTest empDelegate = new PayrollSystemTest();
+
+        Comparer cmp = new Comparer(Employee.compareSSNs);
+
         bool again = true;
 
         while (again)
@@ -28,8 +39,10 @@ public class PayrollSystemTest
                 case "1":
                     //Sort by ssn Asc
                     Console.WriteLine("SORTING BY SSN\n\n");
-                    Array.Sort(payableObjects, Employee.sortBySSNAsc());
-                    foreach (var currentPayable in payableObjects)
+                    
+                    empDelegate.sortSSNs(cmp);
+
+                    foreach (var currentPayable in empDelegate.payableObjects)
                     {
                         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }
@@ -37,8 +50,8 @@ public class PayrollSystemTest
                 case "2":
                     //Sort by last name Desc
                     Console.WriteLine("SORTING BY LAST NAME\n\n");
-                    Array.Sort(payableObjects, Employee.sortByLNameAsc());
-                    foreach (var currentPayable in payableObjects)
+                    Array.Sort(empDelegate.payableObjects, Employee.sortByLNameAsc());
+                    foreach (var currentPayable in empDelegate.payableObjects)
                     {
                         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }
@@ -46,8 +59,8 @@ public class PayrollSystemTest
                 case "3":
                     //Sort by $ Asc
                     Console.WriteLine("SORTING BY PAY\n\n");
-                    Array.Sort(payableObjects, Employee.sortByEarningsAsc());
-                    foreach (var currentPayable in payableObjects)
+                    Array.Sort(empDelegate.payableObjects, Employee.sortByEarningsAsc());
+                    foreach (var currentPayable in empDelegate.payableObjects)
                     {
                         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }
@@ -55,8 +68,8 @@ public class PayrollSystemTest
                 case "4":
                     //Sort by $ Desc
                     Console.WriteLine("SORTING BY PAY\n\n");
-                    Array.Sort(payableObjects, Employee.sortByEarningsDesc());
-                    foreach (var currentPayable in payableObjects)
+                    Array.Sort(empDelegate.payableObjects, Employee.sortByEarningsDesc());
+                    foreach (var currentPayable in empDelegate.payableObjects)
                     {
                         Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }
@@ -69,4 +82,23 @@ public class PayrollSystemTest
         }
 
     } // end Main
+
+    public void sortSSNs(Comparer compare)
+    {
+        IPayable temp;
+
+        for(int j = 0; j < payableObjects.Length; j++)
+        {
+            for (int k = 0; k < payableObjects.Length; k++)
+            {
+                if (compare((Employee)payableObjects[j], (Employee)payableObjects[k]) > 0)
+                {
+                    //Swap
+                    temp = payableObjects[j];
+                    payableObjects[j] = payableObjects[k];
+                    payableObjects[k] = temp;
+                }
+            }
+        }
+    }
 } // end class PayrollSystemTest

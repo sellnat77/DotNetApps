@@ -3,6 +3,7 @@ using System.Collections;
 
 public abstract class Employee : IComparable<Employee>, IPayable 
 {
+
    // read-only property that gets employee's first name
    public string FirstName { get; private set; }
 
@@ -29,7 +30,26 @@ public abstract class Employee : IComparable<Employee>, IPayable
    // Note: We do not implement IPayable method GetPaymentAmount here so
    // this class must be declared abstract to avoid a compilation error.
    public abstract decimal Earnings();
-    
+
+    public static int compareSSNs(Employee emp1, Employee emp2)
+   {
+        string ssn1 = emp1.SocialSecurityNumber;
+        string ssn2 = emp2.SocialSecurityNumber;
+
+        if (String.Compare(ssn1, ssn2) < 0)
+        {
+            return 1;
+        }
+        else if (String.Compare(ssn1, ssn2) > 0)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
+   }
+
     //public void sortByFName();
    public abstract void sortLNameDesc();
 
@@ -155,6 +175,7 @@ public abstract class Employee : IComparable<Employee>, IPayable
     {
         return (IComparer)new sortEarningsAscHelper();
     }
+
    //public void sortBySSN();
    //public void sortByPay();
 } // end abstract class Employee
