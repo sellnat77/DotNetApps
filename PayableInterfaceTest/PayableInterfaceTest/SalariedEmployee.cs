@@ -32,14 +32,10 @@ public class SalariedEmployee : Employee
        return WeeklySalary;
    } // end method Earnings   
 
-   public override void sortLNameDesc()
-   {
-
-   }
-
    // return string representation of SalariedEmployee object
    public override string ToString()
    {
       return string.Format("salaried employee: {0}\n{1}: {2:C}", base.ToString(), "weekly salary", WeeklySalary);
    } // end method ToString
+
 } // end class SalariedEmployee

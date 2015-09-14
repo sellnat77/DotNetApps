@@ -20,7 +20,7 @@ public class PayrollSystemTest
 
     public static void Main(string[] args)
     {
-        PayrollSystemTest empDelegate = new PayrollSystemTest();
+        PayrollSystemTest payrollInstance = new PayrollSystemTest();
 
         Comparer cmp = new Comparer(Employee.compareSSNs);
 
@@ -28,7 +28,7 @@ public class PayrollSystemTest
 
         while (again)
         {
-            Console.WriteLine("1.) Sort by social security number in ascending order");
+            Console.WriteLine("\n\n1.) Sort by social security number in ascending order");
             Console.WriteLine("2.) Sort by last name in descending order");
             Console.WriteLine("3.) Sort by pay amount in ascending order");
             Console.WriteLine("4.) Sort by pay amount in descending order");
@@ -38,49 +38,60 @@ public class PayrollSystemTest
             {
                 case "1":
                     //Sort by ssn Asc
-                    Console.WriteLine("SORTING BY SSN\n\n");
+                    Console.WriteLine("SORTING BY SSN Ascending\n\n");
                     
-                    empDelegate.sortSSNs(cmp);
+                    payrollInstance.sortSSNs(cmp);
 
-                    foreach (var currentPayable in empDelegate.payableObjects)
+                    foreach (var currentPayable in payrollInstance.payableObjects)
                     {
-                        Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+                        Console.WriteLine("{0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }
                     break;
+
                 case "2":
                     //Sort by last name Desc
-                    Console.WriteLine("SORTING BY LAST NAME\n\n");
-                    Array.Sort(empDelegate.payableObjects, Employee.sortByLNameAsc());
-                    foreach (var currentPayable in empDelegate.payableObjects)
+                    Console.WriteLine("SORTING BY LAST NAME Descending\n\n");
+                    Array.Sort(payrollInstance.payableObjects, Employee.sortByLNameAsc());
+                    foreach (var currentPayable in payrollInstance.payableObjects)
                     {
-                        Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+                        Console.WriteLine("{0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }
                     break;
+
                 case "3":
                     //Sort by $ Asc
-                    Console.WriteLine("SORTING BY PAY\n\n");
-                    Array.Sort(empDelegate.payableObjects, Employee.sortByEarningsAsc());
-                    foreach (var currentPayable in empDelegate.payableObjects)
+                    Console.WriteLine("SORTING BY PAY Ascending\n\n");
+                    int k;
+                    Employee[] empCopies = new Employee[payrollInstance.payableObjects.Length];
+                    for(k = 0; k < payrollInstance.payableObjects.Length; k++)
                     {
-                        Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+                        empCopies[k] = (Employee)payrollInstance.payableObjects[k];
+                    }
+
+                    Array.Sort(empCopies);
+
+                    foreach (var currentPayable in empCopies)
+                    {
+                        Console.WriteLine("{0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }
                     break;
+
                 case "4":
                     //Sort by $ Desc
-                    Console.WriteLine("SORTING BY PAY\n\n");
-                    Array.Sort(empDelegate.payableObjects, Employee.sortByEarningsDesc());
-                    foreach (var currentPayable in empDelegate.payableObjects)
+                    Console.WriteLine("SORTING BY PAY Descending\n\n");
+                    Array.Sort(payrollInstance.payableObjects, Employee.sortByEarningsDesc());
+                    foreach (var currentPayable in payrollInstance.payableObjects)
                     {
-                        Console.WriteLine("payment due {0}: {1:C}\n", currentPayable, currentPayable.Earnings());
+                        Console.WriteLine("{0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }
                     break;
+
                 default:
                     again = false;
                     Console.WriteLine("Thank you!");
                     break;
             }
         }
-
     } // end Main
 
     public void sortSSNs(Comparer compare)

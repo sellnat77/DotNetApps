@@ -56,12 +56,7 @@ public class HourlyEmployee : Employee
            return Wage * Hours;
        else
            return (40 * Wage) + ((Hours - 40) * Wage * 1.5M);
-   } // end method Earnings    
-
-   public override void sortLNameDesc()
-   {
-
-   }                    
+   } // end method Earnings                    
 
    // return string representation of HourlyEmployee object
    public override string ToString()
@@ -69,5 +64,6 @@ public class HourlyEmployee : Employee
       return string.Format(
          "hourly employee: {0}\n{1}: {2:C}; {3}: {4:F2}",
          base.ToString(), "hourly wage", Wage, "hours worked", Hours );
-   } // end method ToString                                            
+   } // end method ToString      
+                                      
 } // end class HourlyEmployee

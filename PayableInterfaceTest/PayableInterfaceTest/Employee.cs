@@ -31,7 +31,7 @@ public abstract class Employee : IComparable<Employee>, IPayable
    // this class must be declared abstract to avoid a compilation error.
    public abstract decimal Earnings();
 
-    public static int compareSSNs(Employee emp1, Employee emp2)
+   public static int compareSSNs(Employee emp1, Employee emp2)
    {
         string ssn1 = emp1.SocialSecurityNumber;
         string ssn2 = emp2.SocialSecurityNumber;
@@ -50,20 +50,6 @@ public abstract class Employee : IComparable<Employee>, IPayable
         }
    }
 
-    //public void sortByFName();
-   public abstract void sortLNameDesc();
-
-    private class sortLNameDescHelper : IComparer
-    {
-        int IComparer.Compare(object a, object b)
-        {
-            Employee e1 = (Employee)a;
-            Employee e2 = (Employee)b;
-
-            return string.Compare(e1.LastName, e2.LastName);
-        }
-    }
-
     private class sortLNameAscHelper : IComparer
     {
         int IComparer.Compare(object a, object b)
@@ -72,39 +58,6 @@ public abstract class Employee : IComparable<Employee>, IPayable
             Employee e2 = (Employee)b;
 
             return string.Compare(e1.LastName, e2.LastName)*-1;
-        }
-    }
-
-    private class sortFNameDescHelper : IComparer
-    {
-        int IComparer.Compare(object a, object b)
-        {
-            Employee e1 = (Employee)a;
-            Employee e2 = (Employee)b;
-
-            return string.Compare(e1.FirstName, e2.FirstName);
-        }
-    }
-
-    private class sortSSNDescHelper : IComparer
-    {
-        int IComparer.Compare(object a, object b)
-        {
-            Employee e1 = (Employee)a;
-            Employee e2 = (Employee)b;
-
-            return string.Compare(e1.SocialSecurityNumber, e2.SocialSecurityNumber);
-        }
-    }
-
-    private class sortSSNAscHelper : IComparer
-    {
-        int IComparer.Compare(object a, object b)
-        {
-            Employee e1 = (Employee)a;
-            Employee e2 = (Employee)b;
-
-            return string.Compare(e1.SocialSecurityNumber, e2.SocialSecurityNumber)*-1;
         }
     }
 
@@ -124,31 +77,10 @@ public abstract class Employee : IComparable<Employee>, IPayable
         }
     }
 
-    private class sortEarningsAscHelper : IComparer
-    {
-        int IComparer.Compare(object a, object b)
-        {
-            Employee e1 = (Employee)a;
-            Employee e2 = (Employee)b;
-
-            if (e1.Earnings() > e2.Earnings())
-                return 1;
-            if (e1.Earnings() < e2.Earnings())
-                return -1;
-            else
-                return 0;
-        }
-    }
-
     int IComparable<Employee>.CompareTo(Employee obj)
     {
         Employee emp = (Employee)obj;
-        return String.Compare(this.LastName, emp.LastName);
-    }
-
-    public static IComparer sortByLNameDesc()
-    {
-        return (IComparer) new sortLNameDescHelper();
+        return this.Earnings().CompareTo(emp.Earnings());
     }
     
     public static IComparer sortByLNameAsc()
@@ -156,26 +88,9 @@ public abstract class Employee : IComparable<Employee>, IPayable
         return (IComparer)new sortLNameAscHelper();
     }
 
-    public static IComparer sortBySSNDesc()
-    {
-        return (IComparer)new sortSSNDescHelper();
-    }
-
-    public static IComparer sortBySSNAsc()
-    {
-        return (IComparer)new sortSSNAscHelper();
-    }
-
     public static IComparer sortByEarningsDesc()
     {
         return (IComparer)new sortEarningsDescHelper();
     }
 
-    public static IComparer sortByEarningsAsc()
-    {
-        return (IComparer)new sortEarningsAscHelper();
-    }
-
-   //public void sortBySSN();
-   //public void sortByPay();
 } // end abstract class Employee
