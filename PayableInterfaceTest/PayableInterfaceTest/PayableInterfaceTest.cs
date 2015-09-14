@@ -37,9 +37,8 @@ public class PayrollSystemTest
         {
             Console.WriteLine("\n\n1.) Sort by social security number in ascending order");
             Console.WriteLine("2.) Sort by last name in ascending order");
-            Console.WriteLine("3.) Sort by pay amount in ascending order");
-            Console.WriteLine("4.) Sort by pay amount in descending order");
-            Console.WriteLine("5.) Exit");
+            Console.WriteLine("3.) Sort by pay amount in descending order");
+            Console.WriteLine("4.) Exit");
 
             switch (Console.ReadLine())
             {
@@ -66,9 +65,9 @@ public class PayrollSystemTest
                     break;
 
                 case "3":
-                    //Sort by $ Asc
+                    //Sort by $ Dsc
                     //Using Comparable's default sort order by overriding the CompareTo method
-                    Console.WriteLine("SORTING BY PAY Ascending\n\n");
+                    Console.WriteLine("SORTING BY PAY Decending\n\n");
                     int k;
                     Employee[] empCopies = new Employee[payrollInstance.payableObjects.Length];
                     for(k = 0; k < payrollInstance.payableObjects.Length; k++)
@@ -81,17 +80,6 @@ public class PayrollSystemTest
                     Array.Sort(empCopies);
 
                     foreach (var currentPayable in empCopies)
-                    {
-                        Console.WriteLine("{0}: {1:C}\n", currentPayable, currentPayable.Earnings());
-                    }
-                    break;
-
-                case "4":
-                    //Sort by $ Desc
-                    //Using the ICompare method to sort earnings in descending order
-                    Console.WriteLine("SORTING BY PAY Descending\n\n");
-                    Array.Sort(payrollInstance.payableObjects, Employee.sortByEarningsDesc());
-                    foreach (var currentPayable in payrollInstance.payableObjects)
                     {
                         Console.WriteLine("{0}: {1:C}\n", currentPayable, currentPayable.Earnings());
                     }

@@ -64,41 +64,18 @@ public abstract class Employee : IComparable<Employee>, IPayable
         }
     }
 
-    //Helper method to sort by earnings
-    private class sortEarningsDescHelper : IComparer
-    {
-        int IComparer.Compare(object a, object b)
-        {
-            Employee e1 = (Employee)a;
-            Employee e2 = (Employee)b;
-
-            if (e1.Earnings() < e2.Earnings())
-                return 1;
-            if (e1.Earnings() > e2.Earnings())
-                return -1;
-            else
-                return 0;
-        }
-    }
-
     //Overriding the default CompareTo method to use with the delegate
     int IComparable<Employee>.CompareTo(Employee obj)
     {
         //Forcing the default sort to work on the earnings
         Employee emp = (Employee)obj;
-        return this.Earnings().CompareTo(emp.Earnings());
+        return this.Earnings().CompareTo(emp.Earnings())*-1;
     }
     
     //Method to be used by an outside class to sort last names
     public static IComparer sortByLNameAsc()
     {
         return (IComparer)new sortLNameAscHelper();
-    }
-
-    //Method to be used by an outside class to earnings
-    public static IComparer sortByEarningsDesc()
-    {
-        return (IComparer)new sortEarningsDescHelper();
     }
 
 } // end abstract class Employee
