@@ -31,11 +31,13 @@ public abstract class Employee : IComparable<Employee>, IPayable
    // this class must be declared abstract to avoid a compilation error.
    public abstract decimal Earnings();
 
+    //Method for the delegate compare
    public static int compareSSNs(Employee emp1, Employee emp2)
    {
         string ssn1 = emp1.SocialSecurityNumber;
         string ssn2 = emp2.SocialSecurityNumber;
 
+       //Compares the ssns
         if (String.Compare(ssn1, ssn2) < 0)
         {
             return 1;
@@ -49,7 +51,8 @@ public abstract class Employee : IComparable<Employee>, IPayable
             return 0;
         }
    }
-
+    
+    //Helper method for sorting the last name using icomparer
     private class sortLNameAscHelper : IComparer
     {
         int IComparer.Compare(object a, object b)
@@ -57,10 +60,11 @@ public abstract class Employee : IComparable<Employee>, IPayable
             Employee e1 = (Employee)a;
             Employee e2 = (Employee)b;
 
-            return string.Compare(e1.LastName, e2.LastName)*-1;
+            return string.Compare(e1.LastName, e2.LastName);
         }
     }
 
+    //Helper method to sort by earnings
     private class sortEarningsDescHelper : IComparer
     {
         int IComparer.Compare(object a, object b)
@@ -77,17 +81,21 @@ public abstract class Employee : IComparable<Employee>, IPayable
         }
     }
 
+    //Overriding the default CompareTo method to use with the delegate
     int IComparable<Employee>.CompareTo(Employee obj)
     {
+        //Forcing the default sort to work on the earnings
         Employee emp = (Employee)obj;
         return this.Earnings().CompareTo(emp.Earnings());
     }
     
+    //Method to be used by an outside class to sort last names
     public static IComparer sortByLNameAsc()
     {
         return (IComparer)new sortLNameAscHelper();
     }
 
+    //Method to be used by an outside class to earnings
     public static IComparer sortByEarningsDesc()
     {
         return (IComparer)new sortEarningsDescHelper();
