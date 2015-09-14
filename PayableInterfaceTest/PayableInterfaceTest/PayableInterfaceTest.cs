@@ -55,7 +55,7 @@ public class PayrollSystemTest
                     break;
 
                 case "2":
-                    //Sort by last name Desc
+                    //Sort by last name Asc
                     Console.WriteLine("SORTING BY LAST NAME Ascending\n\n");
                     Array.Sort(payrollInstance.payableObjects, Employee.sortByLNameAsc());
                     foreach (var currentPayable in payrollInstance.payableObjects)
