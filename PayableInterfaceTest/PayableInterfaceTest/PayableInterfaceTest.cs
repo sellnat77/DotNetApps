@@ -1,7 +1,14 @@
 ﻿using System;
 
+public enum SortType
+{
+    Ascending,
+    Descending
+};
+
+
 //Delegate instantiation
-public delegate int Comparer(Employee emp1, Employee emp2);
+public delegate int Comparer(Employee emp1, Employee emp2, SortType order);
 
 public class PayrollSystemTest
 {
@@ -46,7 +53,7 @@ public class PayrollSystemTest
                     //Sort by ssn Asc
                     Console.WriteLine("SORTING BY SSN Ascending\n\n");
                     
-                    payrollInstance.sortSSNs(cmp);
+                    payrollInstance.sortSSNs(cmp, SortType.Ascending);
 
                     foreach (var currentPayable in payrollInstance.payableObjects)
                     {
@@ -95,7 +102,7 @@ public class PayrollSystemTest
     } // end Main
 
     //Method written here for the delegate
-    public void sortSSNs(Comparer compare)
+    public void sortSSNs(Comparer compare, SortType order)
     {
         IPayable temp;
 
@@ -106,7 +113,7 @@ public class PayrollSystemTest
             {
                 //Using the delegate to compare the objects, the delegate grabs the ssns and compares them
                 //Explicit cast needed since the compare method is implemented in the employee class
-                if (compare((Employee)payableObjects[j], (Employee)payableObjects[k]) > 0)
+                if (compare((Employee)payableObjects[j], (Employee)payableObjects[k],order) > 0)
                 {
                     //Swap
                     temp = payableObjects[j];

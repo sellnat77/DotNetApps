@@ -32,23 +32,42 @@ public abstract class Employee : IComparable<Employee>, IPayable
    public abstract decimal Earnings();
 
     //Method for the delegate compare
-   public static int compareSSNs(Employee emp1, Employee emp2)
+   public static int compareSSNs(Employee emp1, Employee emp2, SortType order)
    {
         string ssn1 = emp1.SocialSecurityNumber;
         string ssn2 = emp2.SocialSecurityNumber;
 
-       //Compares the ssns
-        if (String.Compare(ssn1, ssn2) < 0)
+        if ( order == SortType.Ascending)
         {
-            return 1;
-        }
-        else if (String.Compare(ssn1, ssn2) > 0)
-        {
-            return -1;
+            //Compares the ssns
+            if (String.Compare(ssn1, ssn2) < 0)
+            {
+                return 1;
+            }
+            else if (String.Compare(ssn1, ssn2) > 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
         }
         else
         {
-            return 0;
+            //Compares the ssns
+            if (String.Compare(ssn1, ssn2) > 0)
+            {
+                return 1;
+            }
+            else if (String.Compare(ssn1, ssn2) < 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
         }
    }
     
