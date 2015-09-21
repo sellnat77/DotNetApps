@@ -6,7 +6,6 @@ public enum SortType
     Descending
 };
 
-
 //Delegate instantiation
 public delegate int Comparer(Employee emp1, Employee emp2, SortType order);
 
