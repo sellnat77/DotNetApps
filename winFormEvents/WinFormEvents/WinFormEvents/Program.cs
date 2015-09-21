@@ -16,7 +16,10 @@ namespace WinFormEvents
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            //BankAccount theAccount = new BankAccount();
+
+            Application.Run(new bankAccntWindow());
         }
     }
 }
