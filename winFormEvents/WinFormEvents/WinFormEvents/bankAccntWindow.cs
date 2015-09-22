@@ -26,8 +26,8 @@ namespace WinFormEvents
             DisplayBalances();
 
             // Subscribe to the accounts' Overdrawn events.
-            TheAccount.__________ += ______________________;
-            TheAccount.savingsAccount.__________ += ___________________________;
+            TheAccount.Overdrawn += new OverdrawnEventArgs(TheAccount.Balance,Decimal.Parse(overDraftAmountValue.Text));
+            TheAccount.savingsAccount.Overdrawn += new OverdrawnEventArgs(TheAccount.savingsAccount.Balance,Decimal.Parse(savAmountValue.Text));;
         }
 
         // The event handler with event args.
@@ -38,9 +38,9 @@ namespace WinFormEvents
             string message =
                 "The account is overdrawn." + Environment.NewLine +
                 "Current Balance: " + account.Balance.ToString("C") + Environment.NewLine +
-                "Savings Balance: " + account._____________.Balance.ToString("C") + Environment.NewLine +
-                "Debit Amount: " + args.____________.ToString("C");
-            MessageBox.Show(__________________);
+                "Savings Balance: " + account.savingsAccount.Balance.ToString("C") + Environment.NewLine +
+                "Debit Amount: " + args.Amount.ToString("C");
+            MessageBox.Show(message);
         }
 
         // The event handler with event args.
@@ -48,8 +48,8 @@ namespace WinFormEvents
         {
             string message =
                 "The savings account is overdrawn." + Environment.NewLine +
-                "Current Balance: " + args.______________.ToString("C") + Environment.NewLine +
-                "Debit Amount: " + args.______________.ToString("C");
+                "Current Balance: " + args.CurrentBalance.ToString("C") + Environment.NewLine +
+                "Debit Amount: " + args.Amount.ToString("C");
             MessageBox.Show(message);
         }
 
