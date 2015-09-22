@@ -9,15 +9,29 @@ namespace WinFormEvents
     class OverDraftAccount : BankAccount
     {
         public BankAccount savingsAccount { get; set; }
-        public BankAccount overDraftAccount { get; set; }
 
-        double balance { get; set; }
-
-        public new void debit(double amount)
+        public new void Debit(decimal amount)
         {
-            if ( balance + savingsAccount.balance < amount)
+            if ( Balance + savingsAccount.Balance < amount)
             {
-                //do something
+                OnOverdrawn(new OverdrawnEventArgs(savingsAccount.Balance, amount));
+            }
+            else
+            {
+                if(Balance >= amount)
+                {
+                    Balance -= amount;
+                }
+                else
+                {
+                    amount -= Balance;
+                    Balance = 0m;
+
+                    if ( amount > 0m )
+                    {
+                        savingsAccount.Balance -= amount;
+                    }
+                }
             }
 
         }

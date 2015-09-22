@@ -8,27 +8,36 @@ namespace WinFormEvents
 {
     public class BankAccount
     {
-        public double balance { get; set; }
+        public event OverdrawnEventArgs Overdrawn;
+        public decimal Balance { get; set; }
 
         public BankAccount()
         {
-            balance = 0;
+            Balance = 0;
         }
 
-        void credit(double amount)
+        void credit(decimal amount)
         {
-            balance += amount;
+            Balance += amount;
         }
 
-        public void debit(double amount)
+        public void Debit(decimal amount)
         {
-            if (balance == 0)
+            if (Balance >= amount)
             {
-                Console.WriteLine("Balance is zero!");
+                Balance -= amount;
             }
             else
             {
-                balance -= amount;
+                OnOverdrawn(new OverdrawnEventArgs(Balance,amount));
+            }
+        }
+
+        protected virtual void OnOverdrawn(OverdrawnEventArgs overDraw)
+        {
+            if (Overdrawn != null)
+            {
+                Overdrawn(overDraw.CurrentBalance, overDraw.Amount);
             }
         }
     }
