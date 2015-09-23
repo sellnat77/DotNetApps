@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,26 +13,28 @@ namespace WinFormEvents
 {
     public partial class bankAccntWindow : Form
     {
+        OverDraftAccount TheAccount;
+
         public bankAccntWindow()
         {
             InitializeComponent();
         }
-   // Make the accounts.
-        private void Form1_Load(object sender, EventArgs e)
+
+        private void bankAccntWindow_Load(object sender, EventArgs e)
         {
-            OverDraftAccount TheAccount = new OverDraftAccount();
+            TheAccount = new OverDraftAccount();
             TheAccount.savingsAccount = new BankAccount();
             TheAccount.Balance = 50m;
             TheAccount.savingsAccount.Balance = 50m;
             DisplayBalances();
 
-            // Subscribe to the accounts' Overdrawn events.
-            TheAccount.Overdrawn += new OverdrawnEventArgs(TheAccount.Balance,Decimal.Parse(overDraftAmountValue.Text));
-            TheAccount.savingsAccount.Overdrawn += new OverdrawnEventArgs(TheAccount.savingsAccount.Balance,Decimal.Parse(savAmountValue.Text));;
+            // Subscribe to the accounts' Overdrawn events
+            TheAccount.Overdrawn += OverDraftHandler;
+            TheAccount.savingsAccount.Overdrawn += SavingsOverdrawnHandler;
         }
 
         // The event handler with event args.
-        private void ______________________(object sender, OverdrawnEventArgs args)
+        private void OverDraftHandler(object sender, OverdrawnEventArgs args)
         {
             // Get the overdraft account.
             OverDraftAccount account = sender as OverDraftAccount;
@@ -56,7 +59,7 @@ namespace WinFormEvents
         // Add money to the account.
         private void overdraftCreditButton_Click(object sender, EventArgs e)
         {
-            TheAccount.__________________(decimal.Parse(overdraftAmountTextBox.Text, NumberStyles.Currency));
+            TheAccount.credit(decimal.Parse(overDraftAmountValue.Text, NumberStyles.Currency));
 
             // Display the account balance.
             DisplayBalances();
@@ -65,7 +68,7 @@ namespace WinFormEvents
         // Remove money from the account.
         private void overdraftDebitButton_Click(object sender, EventArgs e)
         {
-            TheAccount._________________(decimal.Parse(overdraftAmountTextBox.Text, NumberStyles.Currency));
+            TheAccount.Debit(decimal.Parse(overDraftAmountValue.Text, NumberStyles.Currency));
 
             // Display the account balance.
             DisplayBalances();
@@ -74,8 +77,8 @@ namespace WinFormEvents
         // Add money to the savings account.
         private void savingsCreditButton_Click(object sender, EventArgs e)
         {
-            TheAccount.____________________.__________(
-                decimal.Parse(savingsAmountTextBox.Text,
+            TheAccount.savingsAccount.credit(
+                decimal.Parse(savAmountValue.Text,
                 NumberStyles.Currency));
 
             // Display the account balance.
@@ -85,8 +88,8 @@ namespace WinFormEvents
         // Remove money from the savings account.
         private void savingsDebitButton_Click(object sender, EventArgs e)
         {
-            TheAccount.___________________.____________(decimal.Parse(
-                savingsAmountTextBox.Text,
+            TheAccount.savingsAccount.Debit(decimal.Parse(
+                savAmountValue.Text,
                 NumberStyles.Currency));
 
             // Display the account balance.
@@ -96,7 +99,8 @@ namespace WinFormEvents
         // Display the account balances.
         private void DisplayBalances()
         {
-            ______________________________.Text = ____________________t.Balance.ToString("C");
-            savingsBalanceTextBox.Text = TheAccount._________________.Balance.ToString("C");
+            overDraftBalValue.Text = TheAccount.Balance.ToString("C");
+            savBalValue.Text = TheAccount.savingsAccount.Balance.ToString("C");
         }
     }
+}

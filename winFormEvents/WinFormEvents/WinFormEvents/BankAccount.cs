@@ -8,7 +8,8 @@ namespace WinFormEvents
 {
     public class BankAccount
     {
-        public event OverdrawnEventArgs Overdrawn;
+        public delegate void OverDrawnEventHandler(object sender, OverdrawnEventArgs args);
+        public event OverDrawnEventHandler Overdrawn;
         public decimal Balance { get; set; }
 
         public BankAccount()
@@ -16,7 +17,7 @@ namespace WinFormEvents
             Balance = 0;
         }
 
-        void credit(decimal amount)
+        public void credit(decimal amount)
         {
             Balance += amount;
         }
@@ -33,11 +34,12 @@ namespace WinFormEvents
             }
         }
 
-        protected virtual void OnOverdrawn(OverdrawnEventArgs overDraw)
+        public virtual void OnOverdrawn(OverdrawnEventArgs overDraw)
         {
             if (Overdrawn != null)
             {
-                Overdrawn(overDraw.CurrentBalance, overDraw.Amount);
+                OverdrawnEventArgs args = new OverdrawnEventArgs(overDraw.CurrentBalance, overDraw.Amount);
+                Overdrawn(this,args);
             }
         }
     }

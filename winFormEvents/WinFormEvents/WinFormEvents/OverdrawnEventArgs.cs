@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinFormEvents
 {
-    class OverdrawnEventArgs : EventArgs
+    public class OverdrawnEventArgs : EventArgs
     {
         public decimal CurrentBalance, Amount;
 
