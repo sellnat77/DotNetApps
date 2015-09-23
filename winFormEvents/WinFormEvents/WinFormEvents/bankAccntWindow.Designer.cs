@@ -63,7 +63,7 @@
             // 
             // overDraftDebit
             // 
-            this.overDraftDebit.Location = new System.Drawing.Point(327, 124);
+            this.overDraftDebit.Location = new System.Drawing.Point(327, 143);
             this.overDraftDebit.Name = "overDraftDebit";
             this.overDraftDebit.Size = new System.Drawing.Size(75, 23);
             this.overDraftDebit.TabIndex = 5;
@@ -73,7 +73,7 @@
             // 
             // overDraftCredit
             // 
-            this.overDraftCredit.Location = new System.Drawing.Point(327, 67);
+            this.overDraftCredit.Location = new System.Drawing.Point(327, 114);
             this.overDraftCredit.Name = "overDraftCredit";
             this.overDraftCredit.Size = new System.Drawing.Size(75, 23);
             this.overDraftCredit.TabIndex = 4;
@@ -131,7 +131,7 @@
             // 
             // savDebit
             // 
-            this.savDebit.Location = new System.Drawing.Point(327, 129);
+            this.savDebit.Location = new System.Drawing.Point(327, 150);
             this.savDebit.Name = "savDebit";
             this.savDebit.Size = new System.Drawing.Size(75, 23);
             this.savDebit.TabIndex = 11;
@@ -141,7 +141,7 @@
             // 
             // savCredit
             // 
-            this.savCredit.Location = new System.Drawing.Point(327, 72);
+            this.savCredit.Location = new System.Drawing.Point(327, 121);
             this.savCredit.Name = "savCredit";
             this.savCredit.Size = new System.Drawing.Size(75, 23);
             this.savCredit.TabIndex = 10;
