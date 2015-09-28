@@ -8,8 +8,7 @@ namespace WinFormEvents
 {
     public class BankAccount
     {
-        public delegate void OverDrawnEventHandler(object sender, OverdrawnEventArgs args);
-        public event OverDrawnEventHandler Overdrawn;
+        public event EventHandler<OverdrawnEventArgs> Overdrawn;
         public decimal Balance { get; set; }
 
         public BankAccount()
