@@ -29,7 +29,7 @@ namespace LinqQuerying
             invoiceItems.Add(jigSaw);
             invoiceItems.Add(wrench);
 
-            Console.WriteLine("Sorted by Description:\n\n\n\n");
+            Console.WriteLine("Sorted by Description:");
             var desc = from item in invoiceItems
                        orderby item.PartDescription
                        select item;
@@ -38,7 +38,7 @@ namespace LinqQuerying
                 Console.WriteLine(element.ToString());
             }
 
-            Console.WriteLine("Sorted by price:\n\n\n\n");
+            Console.WriteLine("\n\n\n\nSorted by price:");
             var price = from item in invoiceItems
                        orderby item.Price
                        select item;
@@ -47,7 +47,7 @@ namespace LinqQuerying
                 Console.WriteLine(element.ToString());
             }
 
-            Console.WriteLine("Select description and quantity, sort by quantity:\n\n\n\n");
+            Console.WriteLine("\n\n\n\nSelect description and quantity, sort by quantity:");
             var quan = from item in invoiceItems
                         orderby item.Quantity
                         select new {PartDescription = item.PartDescription, Quantity = item.Quantity};
@@ -56,7 +56,7 @@ namespace LinqQuerying
                 Console.WriteLine(element);
             }
 
-            Console.WriteLine("Select description and invoice total, sort by invoice total:\n\n\n\n");
+            Console.WriteLine("\n\n\n\nSelect description and invoice total, sort by invoice total:");
             var invoiceTtls = from item in invoiceItems
                               orderby (item.Price * item.Quantity)
                               select new { ItemDescription = item.PartDescription, InvoiceTotal = (item.Price * item.Quantity)};
@@ -65,7 +65,7 @@ namespace LinqQuerying
                 Console.WriteLine(element.ToString());
             }
 
-            Console.WriteLine("Invoice totals between $200.00 and $500.00:\n\n\n\n");
+            Console.WriteLine("\n\n\n\nInvoice totals between $200.00 and $500.00:");
             var invoiceTtlsFiltered = from item in invoiceItems
                                       orderby (item.Price * item.Quantity)
                                       where (item.Price * item.Quantity) < 500.00M && (item.Price * item.Quantity) > 200.00M
