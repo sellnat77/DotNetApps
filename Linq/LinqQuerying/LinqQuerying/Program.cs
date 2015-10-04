@@ -29,6 +29,7 @@ namespace LinqQuerying
             invoiceItems.Add(jigSaw);
             invoiceItems.Add(wrench);
 
+            Console.WriteLine("Sorted by Description:\n\n\n\n");
             var desc = from item in invoiceItems
                        orderby item.PartDescription
                        select item;
@@ -37,7 +38,7 @@ namespace LinqQuerying
                 Console.WriteLine(element.ToString());
             }
 
-            Console.WriteLine("\n\n\n\n");
+            Console.WriteLine("Sorted by price:\n\n\n\n");
             var price = from item in invoiceItems
                        orderby item.Price
                        select item;
@@ -46,19 +47,30 @@ namespace LinqQuerying
                 Console.WriteLine(element.ToString());
             }
 
+            Console.WriteLine("Select description and quantity, sort by quantity:\n\n\n\n");
             var quan = from item in invoiceItems
                         orderby item.Quantity
-                        select new {item.PartDescription, item.Quantity};
-            foreach (Invoice element in price)
+                        select new {PartDescription = item.PartDescription, Quantity = item.Quantity};
+            foreach (var element in quan)
             {
-                //Console.WriteLine("{Part Description = {0}, Quantity = {1}",element.PartDescription,element.Quantity);
                 Console.WriteLine(element);
             }
 
+            Console.WriteLine("Select description and invoice total, sort by invoice total:\n\n\n\n");
             var invoiceTtls = from item in invoiceItems
                               orderby (item.Price * item.Quantity)
-                              select new { total=(item.Price*item.Quantity) , desc=item.PartDescription };
+                              select new { ItemDescription = item.PartDescription, InvoiceTotal = (item.Price * item.Quantity)};
             foreach (var element in invoiceTtls)
+            {
+                Console.WriteLine(element.ToString());
+            }
+
+            Console.WriteLine("Invoice totals between $200.00 and $500.00:\n\n\n\n");
+            var invoiceTtlsFiltered = from item in invoiceItems
+                                      orderby (item.Price * item.Quantity)
+                                      where (item.Price * item.Quantity) < 500.00M && (item.Price * item.Quantity) > 200.00M
+                                      select new { ItemDescription = item.PartDescription, InvoiceTotal = (item.Price * item.Quantity)};
+            foreach (var element in invoiceTtlsFiltered)
             {
                 Console.WriteLine(element.ToString());
             }
