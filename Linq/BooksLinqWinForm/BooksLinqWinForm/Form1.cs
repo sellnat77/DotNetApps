@@ -71,6 +71,15 @@ namespace BooksLinqWinForm
                 }
                 outputWindow.AppendText("\r\n");
             }
+
+            int A = 1;
+            double B = 4.5;
+            //A is coerced to a double since C is a double and 
+            //A can be implicitly cast to a double according
+            //to the c# rules
+            double C = A + B;
+
+
         }
     }
 }

@@ -42,7 +42,13 @@ namespace CrudProject
 
         static void readStandard()
         {
-
+            SchoolDBEntities standard = new SchoolDBEntities();
+            var standards = from st in standard.Standards
+                           select st;
+            foreach (var st in standards)
+            {
+                Console.WriteLine(st.Name);
+            }
         }
 
         static void updateStandard()
