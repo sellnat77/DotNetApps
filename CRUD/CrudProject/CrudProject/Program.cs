@@ -14,6 +14,15 @@ namespace CrudProject
 
         }
 
+        static void createStudents(Student student)
+        {
+            using (var contxt = new SchoolDBEntities())
+            {
+                contxt.Students.Add(student);
+                contxt.SaveChanges();
+            }
+        }
+
         static void readStudents()
         {
             SchoolDBEntities school = new SchoolDBEntities();
