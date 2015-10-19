@@ -33,7 +33,8 @@ namespace _475_Lab_4_Part_3
             createStudent(bbb);
 
             //Read all students
-            Console.WriteLine(readStudents("*"));
+            Console.WriteLine(readStudents("aaa aaa"));
+            Console.WriteLine(readStudents("bbb bbb"));
 
             //Update student 1
             updateStudent("aaa aaa","123 aaa new");
@@ -46,7 +47,6 @@ namespace _475_Lab_4_Part_3
 
             //Read all students
             Console.WriteLine(readStudents("aaa aaa"));
-            Console.WriteLine(readStudents("*"));
 
             //Create new standards
             Standard full = new Standard();
@@ -71,6 +71,10 @@ namespace _475_Lab_4_Part_3
             teach2.Standard = full;
             teach3.Standard = part;
 
+            full.Teachers.Add(teach1);
+            full.Teachers.Add(teach2);
+            part.Teachers.Add(teach3);
+
             //Create the standards and teachers in the db
             createStandard(full);
             createStandard(part);
@@ -80,14 +84,24 @@ namespace _475_Lab_4_Part_3
             createTeacher(teach3);
 
             //Read all teachers
-            Console.WriteLine(readTeachers("*"));
+            Console.WriteLine(readTeachers(teach1.TeacherName,1));
+            Console.WriteLine(readTeachers(teach2.TeacherName, 1));
+            Console.WriteLine(readTeachers(teach3.TeacherName, 1));
 
             //Update the full time standard
             updateStandard("FT", "Full-time Instructor Update");
 
             Console.WriteLine(readTeachers("FT"));
-            Console.WriteLine(readStandards("*"));
-        }
+
+            Console.WriteLine(readTeachers(teach1.TeacherName, 1));
+            Console.WriteLine("Teacher 1 id = ", teach1.StandardId);
+            Console.WriteLine("Teacher 2 id = ", teach2.StandardId);
+            
+            teach1.StandardId = teach3.StandardId;
+            Console.WriteLine(readTeachers(teach1.TeacherName, 1));
+            Console.WriteLine("Teacher 1 id = ", teach1.StandardId);
+            Console.WriteLine("Teacher 2 id = ", teach2.StandardId);
+         }
 
         static bool createStudent(Student student)
         {
@@ -121,7 +135,9 @@ namespace _475_Lab_4_Part_3
                     }
                     else
                     {
-                        students += null;
+                        students += "\n\n\nName     : " + student.StudentName
+                                    + "\nAddress 1: null"
+                                    + "\nAddress 2: null";
                     }
                 }
             }
@@ -136,7 +152,9 @@ namespace _475_Lab_4_Part_3
                 }
                 else
                 {
-                    students += null;
+                    students += "\n\n\nName     : " + retStudent.StudentName
+                                    + "\nAddress 1: null"
+                                    + "\nAddress 2: null";
                 }
             }
             return students;
@@ -302,6 +320,67 @@ namespace _475_Lab_4_Part_3
             }
             return teachers;
         }
+        static String readTeachers(String teacherName, int byName)
+        {
+            var contxt = new SchoolDBEntities();
+            string teachers = "";
+            //Return all teachers in db
+            if (teacherName.Trim().Equals("*"))
+            {
+                var retTeach = from tch in contxt.Teachers
+                               select tch;
+
+                foreach (Teacher teacher in retTeach)
+                {
+                    if (teacher.TeacherName != null && teacher.TeacherName != null)
+                    {
+                        teachers += "\n\n\nName     : " + teacher.TeacherName
+                                    + "\nDescription: " + teacher.Standard.Description;
+                    }
+                    else
+                    {
+                        teachers += null;
+                    }
+                }
+            }
+            //Explicit teacher name
+            else
+            {
+                var retTeacher = contxt.Teachers.Where(tch => tch.TeacherName == teacherName).FirstOrDefault<Teacher>();
+                if (retTeacher.TeacherName != null && retTeacher.TeacherName != null)
+                {
+                    teachers += "\n\n\nName     : " + retTeacher.TeacherName
+                                + "\nDescription: " + retTeacher.Standard.Description;
+                }
+                else
+                {
+                    teachers += null;
+                }
+            }
+            return teachers;
+        }
+        
+        //static bool updateTeachID(String newDescription)
+        //{
+        //    //Change standard description based on what is passed in
+        //    var contxt = new SchoolDBEntities();
+        //    Standard toUpdate;
+
+        //    toUpdate = contxt.Standards.Where(st => st.StandardName == standardName).FirstOrDefault<Standard>();
+
+        //    if (toUpdate != null)
+        //    {
+        //        toUpdate.Description = newDescription;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //    contxt.Entry(toUpdate).State = System.Data.Entity.EntityState.Modified;
+        //    contxt.SaveChanges();
+
+        //    return true;
+        //}
     }
 }
 
