@@ -32,7 +32,7 @@ namespace _475_Lab_4_Part_3
 
             Console.WriteLine(readStudents("*"));
 
-            updateStudent("aaa aaa");
+            updateStudent("aaa aaa","123 aaa new");
 
             Console.WriteLine(readStudents("aaa aaa"));
 
@@ -71,12 +71,10 @@ namespace _475_Lab_4_Part_3
 
             Console.WriteLine(readTeachers("*"));
 
-            updateStandard("FT");
+            updateStandard("FT", "Full-time Instructor Update");
 
             Console.WriteLine(readTeachers("FT"));
             Console.WriteLine(readStandards("*"));
-
-
         }
 
         static bool createStudent(Student student)
@@ -136,7 +134,7 @@ namespace _475_Lab_4_Part_3
             return students;
         }
 
-        static bool updateStudent(String studentName)
+        static bool updateStudent(String studentName, String newAddr)
         {
             var contxt = new SchoolDBEntities();
             Student toUpdate;
@@ -145,7 +143,7 @@ namespace _475_Lab_4_Part_3
 
             if(toUpdate != null)
             {
-                toUpdate.StudentAddress.Address1 = "123 aaa new";
+                toUpdate.StudentAddress.Address1 = newAddr;
             }
             else
             {
@@ -223,7 +221,7 @@ namespace _475_Lab_4_Part_3
             return standards;
         }
 
-        static bool updateStandard(String standardName)
+        static bool updateStandard(String standardName, String newDescription)
         {
             var contxt = new SchoolDBEntities();
             Standard toUpdate;
@@ -232,7 +230,7 @@ namespace _475_Lab_4_Part_3
 
             if (toUpdate != null)
             {
-                toUpdate.Description = "Full-time Instructor Update";
+                toUpdate.Description = newDescription;
             }
             else
             {
