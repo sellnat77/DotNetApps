@@ -10,6 +10,7 @@ namespace _475_Lab_4_Part_3
     {
         static void Main(string[] args)
         {
+            //Create student 1
             Student aaa = new Student();
             aaa.StudentName = "aaa aaa";
             aaa.StudentAddress = new StudentAddress();
@@ -18,6 +19,7 @@ namespace _475_Lab_4_Part_3
             aaa.StudentAddress.City = "Long Beach";
             aaa.StudentAddress.State = "California";
 
+            //Create student 2
             Student bbb = new Student();
             bbb.StudentName = "bbb bbb";
             bbb.StudentAddress = new StudentAddress();
@@ -26,21 +28,27 @@ namespace _475_Lab_4_Part_3
             bbb.StudentAddress.City = "Long Beach";
             bbb.StudentAddress.State = "California";
 
-
+            //Create the students in the db
             createStudent(aaa);
             createStudent(bbb);
 
+            //Read all students
             Console.WriteLine(readStudents("*"));
 
+            //Update student 1
             updateStudent("aaa aaa","123 aaa new");
 
+            //Read student 1
             Console.WriteLine(readStudents("aaa aaa"));
 
+            //Delete student 1's address
             deleteStudentAddr("aaa aaa");
 
+            //Read all students
             Console.WriteLine(readStudents("aaa aaa"));
             Console.WriteLine(readStudents("*"));
 
+            //Create new standards
             Standard full = new Standard();
             Standard part = new Standard();
 
@@ -50,6 +58,7 @@ namespace _475_Lab_4_Part_3
             part.StandardName = "PT";
             part.Description = "Part-time Instructor";
 
+            //Create new teachers
             Teacher teach1 = new Teacher();
             Teacher teach2 = new Teacher();
             Teacher teach3 = new Teacher();
@@ -62,6 +71,7 @@ namespace _475_Lab_4_Part_3
             teach2.Standard = full;
             teach3.Standard = part;
 
+            //Create the standards and teachers in the db
             createStandard(full);
             createStandard(part);
 
@@ -69,8 +79,10 @@ namespace _475_Lab_4_Part_3
             createTeacher(teach2);
             createTeacher(teach3);
 
+            //Read all teachers
             Console.WriteLine(readTeachers("*"));
 
+            //Update the full time standard
             updateStandard("FT", "Full-time Instructor Update");
 
             Console.WriteLine(readTeachers("FT"));
@@ -79,7 +91,7 @@ namespace _475_Lab_4_Part_3
 
         static bool createStudent(Student student)
         {
-
+            //Adds student to db
             using (var contxt = new SchoolDBEntities())
             {
                 contxt.Students.Add(student);
@@ -92,9 +104,10 @@ namespace _475_Lab_4_Part_3
         {
             var contxt = new SchoolDBEntities();
             string students = "";
+            
+            //Return all students in db
             if (studentName.Trim().Equals("*"))
             {
-                //Return all students in db
                 var retStudent = from st in contxt.Students
                                  select st;
 
@@ -111,31 +124,27 @@ namespace _475_Lab_4_Part_3
                         students += null;
                     }
                 }
-
             }
             else
             {
-
                 var retStudent = contxt.Students.Where(st => st.StudentName == studentName).FirstOrDefault<Student>();
                 if (retStudent.StudentName != null && retStudent.StudentAddress != null && retStudent.StudentAddress.Address1 != null && retStudent.StudentAddress.Address2 != null)
                 {
                     students += "\n\n\nName     : " + retStudent.StudentName
-                                        + "\nAddress 1: " + retStudent.StudentAddress.Address1
-                                      + "\nAddress 2: " + retStudent.StudentAddress.Address2;
-
+                                + "\nAddress 1: " + retStudent.StudentAddress.Address1
+                                + "\nAddress 2: " + retStudent.StudentAddress.Address2;
                 }
                 else
                 {
                     students += null;
                 }
-
             }
-
             return students;
         }
 
         static bool updateStudent(String studentName, String newAddr)
         {
+            //Updates a student based on whats passed in to the function
             var contxt = new SchoolDBEntities();
             Student toUpdate;
 
@@ -157,6 +166,7 @@ namespace _475_Lab_4_Part_3
 
         static bool deleteStudentAddr(String studentName)
         {
+            //Removes a particular students address
             Student toDel;
             var contxt = new SchoolDBEntities();
 
@@ -168,7 +178,7 @@ namespace _475_Lab_4_Part_3
 
         static bool createStandard(Standard stndrd)
         {
-
+            //Add standard to db
             using (var contxt = new SchoolDBEntities())
             {
                 contxt.Standards.Add(stndrd);
@@ -181,9 +191,11 @@ namespace _475_Lab_4_Part_3
         {
             var contxt = new SchoolDBEntities();
             string standards = "";
+
+            //Return all standards in db
             if (standardName.Trim().Equals("*"))
             {
-                //Return all students in db
+                
                 var retStandards = from st in contxt.Standards
                                  select st;
 
@@ -199,17 +211,14 @@ namespace _475_Lab_4_Part_3
                         standards += null;
                     }
                 }
-
             }
             else
             {
-
                 var retStandard = contxt.Standards.Where(st => st.StandardName == standardName).FirstOrDefault<Standard>();
                 if (retStandard.Description != null && retStandard.StandardName != null)
                 {
                     standards += "\n\n\nName     : " + retStandard.StandardName
-                                        + "\nDescription: " + retStandard.Description;
-
+                                 + "\nDescription: " + retStandard.Description;
                 }
                 else
                 {
@@ -223,6 +232,7 @@ namespace _475_Lab_4_Part_3
 
         static bool updateStandard(String standardName, String newDescription)
         {
+            //Change standard description based on what is passed in
             var contxt = new SchoolDBEntities();
             Standard toUpdate;
 
@@ -244,7 +254,7 @@ namespace _475_Lab_4_Part_3
 
         static bool createTeacher(Teacher teach)
         {
-
+            //Add teacher to db
             using (var contxt = new SchoolDBEntities())
             {
                 contxt.Teachers.Add(teach);
@@ -253,13 +263,13 @@ namespace _475_Lab_4_Part_3
             return true;
         }
 
-        static String readTeachers(String teachName)
+        static String readTeachers(String standardName)
         {
             var contxt = new SchoolDBEntities();
             string teachers = "";
-            if (teachName.Trim().Equals("*"))
+            //Return all teachers in db
+            if (standardName.Trim().Equals("*"))
             {
-                //Return all students in db
                 var retTeach = from tch in contxt.Teachers
                                  select tch;
 
@@ -275,61 +285,23 @@ namespace _475_Lab_4_Part_3
                         teachers += null;
                     }
                 }
-
             }
+            //Explicit standard name
             else
             {
-
-                var retTeacher = contxt.Teachers.Where(tch => tch.Standard.StandardName == teachName).FirstOrDefault<Teacher>();
+                var retTeacher = contxt.Teachers.Where(tch => tch.Standard.StandardName == standardName).FirstOrDefault<Teacher>();
                 if (retTeacher.TeacherName != null && retTeacher.Standard.Description!= null)
                 {
                     teachers += "\n\n\nName     : " + retTeacher.TeacherName
-                                        + "\nDescription: " + retTeacher.Standard.Description;
-
+                                + "\nDescription: " + retTeacher.Standard.Description;
                 }
                 else
                 {
                     teachers += null;
                 }
-
             }
-
             return teachers;
         }
-        /*
-        static bool updateTeacher(String studentName)
-        {
-            var contxt = new SchoolDBEntities();
-            Student toUpdate;
-
-            toUpdate = contxt.Students.Where(st => st.StudentName == studentName).FirstOrDefault<Student>();
-
-            if (toUpdate != null)
-            {
-                toUpdate.StudentAddress.Address1 = "123 aaa new";
-            }
-            else
-            {
-                return false;
-            }
-            contxt.Entry(toUpdate).State = System.Data.Entity.EntityState.Modified;
-            contxt.SaveChanges();
-
-            return true;
-        }
-
-        static bool deleteTeacherAddr(String studentName)
-        {
-            Student toDel;
-            var contxt = new SchoolDBEntities();
-
-            toDel = contxt.Students.Where(st => st.StudentName == studentName).FirstOrDefault<Student>();
-            contxt.Entry(toDel.StudentAddress).State = System.Data.Entity.EntityState.Deleted;
-            contxt.SaveChanges();
-            return true;
-        }
-        */
-
     }
 }
 
