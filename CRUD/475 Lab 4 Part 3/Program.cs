@@ -93,14 +93,10 @@ namespace _475_Lab_4_Part_3
 
             Console.WriteLine(readTeachers("FT"));
 
-            Console.WriteLine(readTeachers(teach1.TeacherName, 1));
-            Console.WriteLine("Teacher 1 id = ", teach1.StandardId);
-            Console.WriteLine("Teacher 2 id = ", teach2.StandardId);
+            Console.WriteLine(readTeachers(teach1.TeacherName, 1));            
             
-            teach1.StandardId = teach3.StandardId;
+            updateTeachID(teach1, teach3);
             Console.WriteLine(readTeachers(teach1.TeacherName, 1));
-            Console.WriteLine("Teacher 1 id = ", teach1.StandardId);
-            Console.WriteLine("Teacher 2 id = ", teach2.StandardId);
          }
 
         static bool createStudent(Student student)
@@ -131,7 +127,8 @@ namespace _475_Lab_4_Part_3
                     {
                         students += "\n\n\nName     : " + student.StudentName
                                     + "\nAddress 1: " + student.StudentAddress.Address1
-                                    + "\nAddress 2: " + student.StudentAddress.Address2;
+                                    + "\nAddress 2: " + student.StudentAddress.Address2
+                                    + "\n " + student.StudentAddress.City + " " + student.StudentAddress.State;
                     }
                     else
                     {
@@ -148,7 +145,8 @@ namespace _475_Lab_4_Part_3
                 {
                     students += "\n\n\nName     : " + retStudent.StudentName
                                 + "\nAddress 1: " + retStudent.StudentAddress.Address1
-                                + "\nAddress 2: " + retStudent.StudentAddress.Address2;
+                                + "\nAddress 2: " + retStudent.StudentAddress.Address2
+                                + "\n " + retStudent.StudentAddress.City + " " + retStudent.StudentAddress.State;
                 }
                 else
                 {
@@ -335,7 +333,8 @@ namespace _475_Lab_4_Part_3
                     if (teacher.TeacherName != null && teacher.TeacherName != null)
                     {
                         teachers += "\n\n\nName     : " + teacher.TeacherName
-                                    + "\nDescription: " + teacher.Standard.Description;
+                                    + "\nDescription: " + teacher.Standard.Description
+                                    +"\nID: " + teacher.Standard.StandardId;
                     }
                     else
                     {
@@ -350,7 +349,8 @@ namespace _475_Lab_4_Part_3
                 if (retTeacher.TeacherName != null && retTeacher.TeacherName != null)
                 {
                     teachers += "\n\n\nName     : " + retTeacher.TeacherName
-                                + "\nDescription: " + retTeacher.Standard.Description;
+                                + "\nDescription: " + retTeacher.Standard.Description
+                                + "\nID: " + retTeacher.Standard.StandardId;
                 }
                 else
                 {
@@ -360,27 +360,29 @@ namespace _475_Lab_4_Part_3
             return teachers;
         }
         
-        //static bool updateTeachID(String newDescription)
-        //{
-        //    //Change standard description based on what is passed in
-        //    var contxt = new SchoolDBEntities();
-        //    Standard toUpdate;
+        static bool updateTeachID(Teacher toChange, Teacher changeTo)
+        {
+            //Change standard description based on what is passed in
+            var contxt = new SchoolDBEntities();
+            Teacher toUpdate;
+            Teacher change;
 
-        //    toUpdate = contxt.Standards.Where(st => st.StandardName == standardName).FirstOrDefault<Standard>();
+            toUpdate = contxt.Teachers.Where(st => st.TeacherName== toChange.TeacherName).FirstOrDefault<Teacher>();
+            change = contxt.Teachers.Where(st => st.TeacherName == changeTo.TeacherName).FirstOrDefault<Teacher>();
 
-        //    if (toUpdate != null)
-        //    {
-        //        toUpdate.Description = newDescription;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //    contxt.Entry(toUpdate).State = System.Data.Entity.EntityState.Modified;
-        //    contxt.SaveChanges();
+            if (toUpdate != null)
+            {
+                toUpdate.StandardId = change.StandardId;
+            }
+            else
+            {
+                return false;
+            }
+            contxt.Entry(toUpdate).State = System.Data.Entity.EntityState.Modified;
+            contxt.SaveChanges();
 
-        //    return true;
-        //}
+            return true;
+        }
     }
 }
 
