@@ -180,6 +180,31 @@ namespace _475_Lab_4_Part_3
             return true;
         }
 
+
+        static bool updateStudentDisconnect(String studentName, String newAddr)
+        {
+            Student toUpdate;
+            //Update student address in disconnected mode
+            using (var contxt = new SchoolDBEntities())
+            {
+                toUpdate = contxt.Students.Where(st => st.StudentName == studentName).FirstOrDefault<Student>();
+            }
+            if (toUpdate != null)
+            {
+                toUpdate.StudentAddress.Address1 = newAddr;
+            }
+            else
+            {
+                return false;
+            }
+            using (var contxt1 = new SchoolDBEntities())
+            {
+                contxt1.Entry(toUpdate).State = System.Data.Entity.EntityState.Modified;
+                contxt1.SaveChanges();
+            }
+            return true;
+        }
+
         static bool deleteStudentAddr(String studentName)
         {
             //Removes a particular students address
@@ -381,6 +406,35 @@ namespace _475_Lab_4_Part_3
             contxt.Entry(toUpdate).State = System.Data.Entity.EntityState.Modified;
             contxt.SaveChanges();
 
+            return true;
+        }
+
+        static bool updateTeachIDDisconnect(Teacher toChange, Teacher changeTo)
+        {
+            //Change standard description based on what is passed in
+            //Disconnected mode
+            Teacher toUpdate;
+            Teacher change;
+            using (var contxt = new SchoolDBEntities())
+            {
+                toUpdate = contxt.Teachers.Where(st => st.TeacherName == toChange.TeacherName).FirstOrDefault<Teacher>();
+                change = contxt.Teachers.Where(st => st.TeacherName == changeTo.TeacherName).FirstOrDefault<Teacher>();
+            }
+
+            if (toUpdate != null && change != null)
+            {
+                toUpdate.StandardId = change.StandardId;
+            }
+            else
+            {
+                return false;
+            }
+
+            using (var contxt1 = new SchoolDBEntities())
+            {
+                contxt1.Entry(toUpdate).State = System.Data.Entity.EntityState.Modified;
+                contxt1.SaveChanges();
+            }
             return true;
         }
     }
