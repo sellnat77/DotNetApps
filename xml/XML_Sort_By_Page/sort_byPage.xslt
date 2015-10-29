@@ -42,15 +42,48 @@
           <xsl:sort select = "@pages" data-type = "number"
                order = "ascending"/>
           <tr>
-            <td style = "text-align: right">
-              <xsl:value-of select = "name()"/>
-            </td>
-            <td style = "text-align: right">
-              Chapter <xsl:value-of select = "@number"/>
-            </td>
-            <td>
-              ( <xsl:value-of select = "@pages"/> pages )
-            </td>
+            
+            <xsl:choose>
+              <xsl:when test="ancestor::frontMatter">
+                <td>
+                  <xsl:value-of select = "name()"/>
+                </td>
+                <td>
+                  ( <xsl:value-of select = "@pages"/> pages )
+                </td>
+              </xsl:when>
+              <xsl:otherwise>
+                
+                <xsl:choose>
+                  <xsl:when test="self::appendix">
+                    <td>
+                      <xsl:value-of select = "name()"/>
+                      &#160;
+                      <xsl:value-of select = "@number"/>
+                    </td>
+                    <td>
+                      <xsl:value-of select = "text()"></xsl:value-of>
+                    </td>
+                    <td>
+                      ( <xsl:value-of select = "@pages"/> pages )
+                    </td>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <td>
+                      Chapter <xsl:value-of select = "@number"></xsl:value-of>
+                    </td>
+                    <td>
+                      <xsl:value-of select = "text()"></xsl:value-of>
+                    </td>
+                    <td>
+                      ( <xsl:value-of select = "@pages"/> pages )
+                    </td>
+                  </xsl:otherwise>
+                </xsl:choose>
+                
+              </xsl:otherwise>
+            </xsl:choose>
+            
           </tr>
         </xsl:for-each>
       </table>
