@@ -45,7 +45,7 @@
             
             <xsl:choose>
               <xsl:when test="ancestor::frontMatter">
-                <td>
+                <td style="text-align: right">
                   <xsl:value-of select = "name()"/>
                 </td>
                 <td>
@@ -56,7 +56,7 @@
                 
                 <xsl:choose>
                   <xsl:when test="self::appendix">
-                    <td>
+                    <td style="text-align: right">
                       <xsl:value-of select = "name()"/>
                       &#160;
                       <xsl:value-of select = "@number"/>
@@ -69,10 +69,10 @@
                     </td>
                   </xsl:when>
                   <xsl:otherwise>
-                    <td>
+                    <td style="text-align: right">
                       Chapter <xsl:value-of select = "@number"></xsl:value-of>
                     </td>
-                    <td>
+                    <td style="text-align: right">
                       <xsl:value-of select = "text()"></xsl:value-of>
                     </td>
                     <td>
