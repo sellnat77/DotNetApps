@@ -32,6 +32,7 @@ namespace LinqToXmlBasics
           new XElement("Car", new XAttribute("ID", "1"),
             new XElement("Color", "Green"),
             new XElement("Make", "BMW"),
+            new XElement("Year", "2005"),
             new XElement("PetName", "Stan")
           )
         );
@@ -49,12 +50,20 @@ namespace LinqToXmlBasics
               new XElement("Car", new XAttribute("ID", "1"),
                 new XElement("Color", "Green"),
                 new XElement("Make", "BMW"),
+                new XElement("Year", "2005"),
                 new XElement("PetName", "Stan")
               ),
               new XElement("Car", new XAttribute("ID", "2"),
                 new XElement("Color", "Pink"),
                 new XElement("Make", "Yugo"),
+                new XElement("Year", "2008"),
                 new XElement("PetName", "Melvin")
+              ),
+              new XElement("Car", new XAttribute("ID", "3"),
+                new XElement("Color", "Candy Apple Red"),
+                new XElement("Make", "BMW"),
+                new XElement("Year", "2014"),
+                new XElement("PetName", "Coco")
               )
             )
           );
@@ -96,7 +105,8 @@ namespace LinqToXmlBasics
       string myElement =
         @"<Car ID ='3'>
             <Color>Yellow</Color>
-            <Make>Yugo</Make>    
+            <Make>Yugo</Make>
+            <Year>2008</Year>    
           </Car>";
       XElement newElement = XElement.Parse(myElement);
       Console.WriteLine(newElement);
