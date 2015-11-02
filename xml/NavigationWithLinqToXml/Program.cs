@@ -23,6 +23,7 @@ namespace NavigationWithLinqToXml
       AddNewElements(doc);
       Console.ReadLine();
       displayCarMakeColor(doc);
+      Console.ReadLine();
     }
 
     #region Helper methods
@@ -70,12 +71,13 @@ namespace NavigationWithLinqToXml
       // Add 5 new purple Fords to the incoming document.
       for (int i = 0; i < 5; i++)
       {
+          string pets = "Spot " + i;
         // Create a new XElement
         XElement newCar =
           new XElement("Car", new XAttribute("ID", i + 1000),
             new XElement("Color", "Green"),
             new XElement("Make", "Ford"),
-            new XElement("PetName", "")
+            new XElement("PetName", pets)
         );
 
         // Add to doc.
