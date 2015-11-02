@@ -22,6 +22,7 @@ namespace NavigationWithLinqToXml
       Console.WriteLine(); 
       AddNewElements(doc);
       Console.ReadLine();
+      displayCarMakeColor(doc);
     }
 
     #region Helper methods
@@ -42,6 +43,26 @@ namespace NavigationWithLinqToXml
 
       foreach (var f in fords)
         Console.WriteLine("Name: {0}", f);
+    }
+    
+    static void displayCarMakeColor(XElement doc)
+    {
+        Console.Write("Please enter a make:");
+        string make = Console.ReadLine();
+        Console.Write("Please enter a color:");
+        string color = Console.ReadLine();
+
+        var filtered = from c in doc.Elements()
+                     where c.Element("Make").Value.ToLower() == make.ToLower()
+                     where c.Element("Color").Value.ToLower() == color.ToLower()
+                    select c;
+
+        foreach (var f in filtered)
+        {
+            Console.WriteLine("Pet name: {0}", f.Element("PetName").Value);
+            Console.WriteLine("Make: {0}", f.Element("Make").Value);
+            Console.WriteLine("Color: {0}", f.Element("Color").Value);
+        }
     }
 
     static void AddNewElements(XElement doc)
