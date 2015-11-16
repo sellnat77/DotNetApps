@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E9DA9974-72B6-44E5-A669-FFD192A85182}</ProjectGuid>
+    <ProjectGuid>{0B049749-5027-4271-A49F-AFB65C9135E4}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PhoneBookRESTXMLService</RootNamespace>
-    <AssemblyName>PhoneBookRESTXMLService</AssemblyName>
+    <RootNamespace>BooksService</RootNamespace>
+    <AssemblyName>BooksService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <UseIISExpress>true</UseIISExpress>
@@ -40,11 +40,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -65,77 +67,61 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\PhoneBook.mdf" />
-    <Content Include="App_Data\PhoneBook_log.ldf">
-      <DependentUpon>PhoneBook.mdf</DependentUpon>
+    <Content Include="App_Data\Books.mdf" />
+    <Content Include="App_Data\Books_log.ldf">
+      <DependentUpon>Books.mdf</DependentUpon>
     </Content>
-    <Content Include="PhoneBookRESTXMLService.svc" />
-    <Content Include="Service References\ServiceReference1\PhoneBookRESTXMLService.ServiceReference1.HelloWorldResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Service References\ServiceReference1\storeEntries.disco" />
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <Content Include="storeEntries.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PhoneBook.cs">
-      <DependentUpon>PhoneBookModel.tt</DependentUpon>
+    <Compile Include="Author.cs">
+      <DependentUpon>Books.tt</DependentUpon>
     </Compile>
-    <Compile Include="PhoneBookEntry.cs" />
-    <Compile Include="PhoneBookModel.Context.cs">
+    <Compile Include="Books.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PhoneBookModel.Context.tt</DependentUpon>
+      <DependentUpon>Books.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PhoneBookModel.cs">
+    <Compile Include="Books.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PhoneBookModel.tt</DependentUpon>
+      <DependentUpon>Books.tt</DependentUpon>
     </Compile>
-    <Compile Include="PhoneBookModel.Designer.cs">
+    <Compile Include="Books.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PhoneBookModel.edmx</DependentUpon>
+      <DependentUpon>Books.edmx</DependentUpon>
     </Compile>
-    <Compile Include="PhoneBookRESTXMLService.svc.cs">
-      <DependentUpon>PhoneBookRESTXMLService.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IPhoneBookRESTXMLService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <Compile Include="storeEntries.asmx.cs">
+      <DependentUpon>storeEntries.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Title.cs">
+      <DependentUpon>Books.tt</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-    <EntityDeploy Include="PhoneBookModel.edmx">
+    <EntityDeploy Include="Books.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PhoneBookModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Books.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="PhoneBookModel.Context.tt">
+    <Content Include="Books.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PhoneBookModel.edmx</DependentUpon>
-      <LastGenOutput>PhoneBookModel.Context.cs</LastGenOutput>
+      <DependentUpon>Books.edmx</DependentUpon>
+      <LastGenOutput>Books.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="PhoneBookModel.edmx.diagram">
-      <DependentUpon>PhoneBookModel.edmx</DependentUpon>
+    <Content Include="Books.edmx.diagram">
+      <DependentUpon>Books.edmx</DependentUpon>
     </Content>
-    <Content Include="PhoneBookModel.tt">
+    <Content Include="Books.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PhoneBookModel.edmx</DependentUpon>
-      <LastGenOutput>PhoneBookModel.cs</LastGenOutput>
+      <DependentUpon>Books.edmx</DependentUpon>
+      <LastGenOutput>Books.cs</LastGenOutput>
     </Content>
-    <None Include="Service References\ServiceReference1\storeEntries.wsdl" />
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -145,9 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -162,9 +145,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>53025</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52163/</IISUrl>
+          <IISUrl>http://localhost:53025/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
