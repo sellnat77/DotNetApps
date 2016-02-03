@@ -31,6 +31,11 @@ namespace TicTacToe
         private bool playerOne;
         private bool gameOver;
 
+        private enum gameStatus
+        {
+            playerOneWin = 0, playerTwoWin, catsGame
+        };
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TicTacToe" /> class with zeroed out members
         /// </summary>
@@ -123,6 +128,7 @@ namespace TicTacToe
                     {
                         // Try catch used to throw out "format" exceptions
                         // This limits the input to ONLY intgers
+                        this.PrintCenter("Enter a number please.\n");
                     }
 
                     this.PrintBoard();
